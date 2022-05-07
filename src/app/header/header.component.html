@@ -1,0 +1,35 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">Better Job</a>
+  <button id="hamburger-menu" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Search job</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Recruiters</a>
+      </li>
+    </ul>
+    <div class="navbar-nav ml-auto">
+      <button class="btn btn-light header-button" data-toggle="modal" data-target="#logInModal">Log in</button>
+      <button class="btn btn-light header-button" data-toggle="modal" data-target="#signInModal">Sign in</button>
+    </div>
+  </div>
+</nav>
+
+
+<!-- Sign In Modal -->
+<div class="modal fade" id="signInModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <app-sign-in-modal></app-sign-in-modal>
+</div>
+
+<!-- Log In Modal -->
+<div class="modal fade" id="logInModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <app-log-in-modal></app-log-in-modal>
+</div>
+

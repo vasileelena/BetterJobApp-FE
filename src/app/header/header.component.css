@@ -1,0 +1,14 @@
+#hamburger-menu{
+  margin-right: 2%;
+}
+
+.header-button{
+  margin: 2%;
+  width: 100px;
+}
+
+@media only screen and (max-width: 991px){
+  .header-button{
+    margin: 1%;
+  }
+}
