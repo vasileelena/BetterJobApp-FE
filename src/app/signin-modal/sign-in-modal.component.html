@@ -1,40 +1,123 @@
-<div class="modal-dialog" role="document">
+<div class="modal-dialog" role="document" #signinModal>
   <div class="modal-content">
     <div class="modal-header">
-      <h5 class="modal-title" id="exampleModalLabel">Sign in</h5>
-      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <h5 class="modal-title" id="signinModal">Sign in</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="onCancel()">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
-    <div class="modal-body">
-      <form (ngSubmit)="onSubmit()" #form="ngForm">
-        <label for="firstName">First name</label><br>
-        <input
-          id="firstName"
-          name="firstName"
-          type="text"
-          ngModel
-          class="form-control"
-          #firstName="ngModel"><br>
-        <label for="lastName">Last name</label><br>
-        <input
-          id="lastName"
-          type="text"><br>
-        <label for="username">Username</label><br>
-        <input
-          id="username"
-          type="text"><br>
-        <label for="email">Email</label><br>
-        <input
-          id="email"
-          type="text"><br>
-        <label for="birthday">Birthday</label><br>
-        <input type="date" id="birthday" name="birthday">
-      </form>
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      <button type="button" class="btn btn-primary">Submit</button>
-    </div>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="firstName">First name</label><br>
+          <input
+            id="firstName"
+            formControlName="firstName"
+            type="text"
+            class="form-control">
+          <span
+            *ngIf="!formControls['firstName'].valid && formControls['firstName'].touched"
+            class="text-danger">
+          This field is required
+          </span>
+        </div>
+        <div class="form-group">
+          <label for="lastName">Last name</label><br>
+          <input
+            id="lastName"
+            type="text"
+            formControlName="lastName"
+            class="form-control">
+          <span
+            *ngIf="!formControls['lastName'].valid && formControls['lastName'].touched"
+            class="text-danger">
+          This field is required
+          </span>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label><br>
+          <input
+            id="email"
+            type="text"
+            formControlName="email"
+            class="form-control">
+          <span
+            *ngIf="!formControls['email'].valid && formControls['email'].touched"
+            class="text-danger">
+            <span *ngIf="form.hasError('email', 'email')">
+              Please enter a valid email
+            </span>
+            <span *ngIf="form.hasError('required', 'email')">
+              This field is required
+            </span>
+            <span
+              *ngIf="form.hasError('unavailableEmail', 'email')"
+              class="text-danger">
+            Please enter an available email
+            </span>
+          </span>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label><br>
+          <input
+            id="password"
+            type="password"
+            formControlName="password"
+            class="form-control">
+          <span
+            *ngIf="!formControls['password'].valid && formControls['password'].touched"
+            class="text-danger">
+            <span *ngIf="form.hasError('required', 'password')">
+              This field is required
+            </span>
+            <span
+              *ngIf="formControls['password'].touched && form.hasError('pattern', 'password')"
+              class="text-danger">
+              Password must contain at least 8 characters of which one upper case, lower case, number and symbol.
+            </span>
+          </span>
+        </div>
+        <div class="form-group">
+          <label for="confirmPass">Confirm password</label><br>
+          <input
+            id="confirmPass"
+            type="password"
+            formControlName="confirmPass"
+            class="form-control">
+          <span
+            *ngIf="!formControls['confirmPass'].valid && formControls['confirmPass'].touched"
+            class="text-danger">
+            <span *ngIf="form.hasError('required', 'confirmPass')">
+              This field is required
+            </span>
+            <span *ngIf="form.hasError('noMatch', 'confirmPass')">
+              Password do not match
+            </span>
+          </span>
+        </div>
+        <div class="form-group">
+          <label for="birthDate">Birth date</label><br>
+          <input id="birthDate"
+                 name="birthDate"
+                 type="date"
+                 formControlName="birthDate"
+                 class="form-control">
+          <span
+            *ngIf="form.hasError('underage', 'birthDate') && formControls['birthDate'].touched"
+            class="text-danger">
+            You can't register to our website if you are under 16 years old!
+          </span>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="onCancel()">Close</button>
+        <button
+          class="btn btn-primary"
+          type="submit"
+          [disabled]="!form.valid">
+          Submit
+        </button>
+      </div>
+    </form>
   </div>
 </div>
