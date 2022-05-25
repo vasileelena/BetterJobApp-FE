@@ -16,20 +16,36 @@
       </li>
     </ul>
     <div class="navbar-nav ml-auto">
-      <button class="btn btn-light header-button" data-toggle="modal" data-target="#logInModal">Log in</button>
-      <button class="btn btn-light header-button" data-toggle="modal" data-target="#signInModal">Sign in</button>
+      <button
+        *ngIf="isUserLoggedIn()"
+        class="btn btn-light header-button"
+        (click)="logout()">
+        Log out
+      </button>
+      <button
+        *ngIf="!isUserLoggedIn()"
+        (click)="openLoginModal()"
+        class="btn btn-light header-button"
+        routerLinkActive="active"
+        routerLink="/login">
+        Log in
+      </button>
+      <button
+        class="btn btn-light header-button"
+        (click)="openSigninModal()"
+        routerLinkActive="active"
+        routerLink="/signin">
+        Sign in
+      </button>
     </div>
   </div>
 </nav>
 
+<!--data-toggle="modal"-->
+<!--data-target="#modal"-->
 
-<!-- Sign In Modal -->
-<div class="modal fade" id="signInModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <app-sign-in-modal></app-sign-in-modal>
-</div>
+<!--<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
+  <router-outlet></router-outlet>
+<!--</div>-->
 
-<!-- Log In Modal -->
-<div class="modal fade" id="logInModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <app-log-in-modal></app-log-in-modal>
-</div>
 

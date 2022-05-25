@@ -9,6 +9,7 @@ import {HeaderComponent} from './header/header.component';
 import {SignInModalComponent} from './signin-modal/sign-in-modal.component';
 import {LogInModalComponent} from './login-modal/log-in-modal.component';
 import {ReactiveFormsModule} from "@angular/forms";
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import {ReactiveFormsModule} from "@angular/forms";
     UserComponent,
     HeaderComponent,
     SignInModalComponent,
-    LogInModalComponent
+    LogInModalComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

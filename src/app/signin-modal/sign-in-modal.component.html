@@ -1,4 +1,4 @@
-<div class="modal-dialog" role="document" #signinModal>
+<div class="modal-dialog" role="document" #modal>
   <div class="modal-content">
     <div class="modal-header">
       <h5 class="modal-title" id="signinModal">Sign in</h5>
@@ -108,9 +108,31 @@
             You can't register to our website if you are under 16 years old!
           </span>
         </div>
+        <label for="roleGroup">I am a:</label>
+          <div id="roleGroup">
+            <label>
+              <input
+                name="role"
+                type="radio"
+                [value]="roles[0]"
+                formControlName="role"
+                class="radio">
+              User
+            </label>
+            <label>
+              <input
+                name="role"
+                type="radio"
+                [value]="roles[1]"
+                formControlName="role"
+                class="radio">
+              Recruiter
+            </label>
+          </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="onCancel()">Close</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="onCancel()"
+                >Close</button>
         <button
           class="btn btn-primary"
           type="submit"

@@ -1,6 +1,7 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
+import { map } from 'rxjs/operators';
 import {User} from "./user.model";
 import {environment} from "../../environments/environment";
 
@@ -17,7 +18,7 @@ export class UserService{
   }
 
   public addUser(user: User): Observable<User> {
-    return this.http.post<User>(this.url + '/add', user);
+    return this.http.post<User>( environment.apiBaseUrl + '/signin', user);
   }
 
   public updateUser(user: User): Observable<User> {

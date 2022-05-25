@@ -3,7 +3,9 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {CustomValidators} from "../custom-validators";
 import {HttpErrorResponse} from "@angular/common/http";
 import {UserService} from "../user/user.service";
-import {User} from "../user/user.model";
+import {RoleEnum, User} from "../user/user.model";
+import {Router} from "@angular/router";
+import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: 'app-sign-in-modal',
@@ -14,8 +16,12 @@ export class SignInModalComponent implements OnInit {
 
   form: FormGroup = new FormGroup({});
   passRegex: RegExp = /^(?=.*\d)(?=.*[!.@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+  roles: RoleEnum[] = [RoleEnum.USER, RoleEnum.RECRUITER];
 
-  constructor(private formBuilder: FormBuilder, private userService: UserService) {
+  constructor(private formBuilder: FormBuilder,
+              private userService: UserService,
+              private router: Router,
+              private modalService: NgbActiveModal) {
   }
 
   ngOnInit(): void {
@@ -31,7 +37,8 @@ export class SignInModalComponent implements OnInit {
         "email": [null, [Validators.required, Validators.email]],
         "password": [null, Validators.compose([Validators.required, Validators.pattern(this.passRegex)])],
         "confirmPass": [null, Validators.required],
-        "birthDate": [null, [Validators.required]]
+        "birthDate": [null, Validators.required],
+        "role": [RoleEnum.USER, Validators.required]
       },
       {
         validator: [CustomValidators.passwordMatchValidator, CustomValidators.birthDateValidator]
@@ -44,6 +51,7 @@ export class SignInModalComponent implements OnInit {
     this.userService.addUser(this.form.value).subscribe(
       (response: User) => {
         this.form.reset();
+        this.onCancel();
       },
       (error: HttpErrorResponse) => {
         alert('This email is already taken!');
@@ -55,6 +63,9 @@ export class SignInModalComponent implements OnInit {
 
   onCancel() {
     this.form.reset();
+    this.router.navigate(['/']).then(
+      () => this.modalService.dismiss()
+    );
   }
 
   get formControls() {
