@@ -2,7 +2,7 @@ import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import { map } from 'rxjs/operators';
-import {User} from "./user.model";
+import {User} from "../user/user.model";
 import {environment} from "../../environments/environment";
 
 @Injectable({
@@ -27,5 +27,9 @@ export class UserService{
 
   public deleteUser(id: number): Observable<void> {
     return this.http.delete<void>(this.url + 'id' + id.toString());
+  }
+
+  public getUserByEmail(email: string): Observable<User> {
+    return this.http.get<User>(this.url + '/email/' + email.toString());
   }
 }

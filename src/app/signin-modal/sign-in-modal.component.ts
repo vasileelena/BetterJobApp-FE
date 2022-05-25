@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {CustomValidators} from "../custom-validators";
 import {HttpErrorResponse} from "@angular/common/http";
-import {UserService} from "../user/user.service";
+import {UserService} from "../service/user.service";
 import {RoleEnum, User} from "../user/user.model";
 import {Router} from "@angular/router";
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
@@ -37,8 +37,9 @@ export class SignInModalComponent implements OnInit {
         "email": [null, [Validators.required, Validators.email]],
         "password": [null, Validators.compose([Validators.required, Validators.pattern(this.passRegex)])],
         "confirmPass": [null, Validators.required],
-        "birthDate": [null, Validators.required],
-        "role": [RoleEnum.USER, Validators.required]
+        "role": [null, Validators.required],
+        "company": [null],
+        "birthDate": [null]
       },
       {
         validator: [CustomValidators.passwordMatchValidator, CustomValidators.birthDateValidator]
@@ -70,6 +71,27 @@ export class SignInModalComponent implements OnInit {
 
   get formControls() {
     return this.form.controls;
+  }
+
+  public checkIfValid() {
+    // const role = this.form.get('role')?.value;
+    // if(role === RoleEnum.USER ) {
+    //   this.form.get('company')?.setValue(null);
+    //   this.form.get('company')?.clearValidators();
+    //   // this.form.get('company')?.updateValueAndValidity({onlySelf: true});
+    //
+    //   this.form.get('birthDate')?.addValidators(Validators.required);
+    //   // this.form.get('birthDate')?.updateValueAndValidity({onlySelf: true});
+    // }
+    // else if(role === RoleEnum.RECRUITER ){
+    //   this.form.get('birthDate')?.setValue(null);
+    //   this.form.get('birthDate')?.clearValidators();
+    //   // this.form.get('birthDate')?.updateValueAndValidity({onlySelf: true});
+    //
+    //   this.form.get('company')?.addValidators(Validators.required);
+    //   // this.form.get('company')?.updateValueAndValidity({onlySelf: true});
+    //
+    // }
   }
 
 }

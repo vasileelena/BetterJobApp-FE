@@ -10,6 +10,9 @@ import {SignInModalComponent} from './signin-modal/sign-in-modal.component';
 import {LogInModalComponent} from './login-modal/log-in-modal.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import { HomeComponent } from './home/home.component';
+import { RecruiterComponent } from './recruiter/recruiter.component';
+import { JobComponent } from './job/job/job.component';
+import { EditJobComponent } from './job/edit-job/edit-job.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +21,10 @@ import { HomeComponent } from './home/home.component';
     HeaderComponent,
     SignInModalComponent,
     LogInModalComponent,
-    HomeComponent
+    HomeComponent,
+    RecruiterComponent,
+    JobComponent,
+    EditJobComponent
   ],
   imports: [
     BrowserModule,

@@ -9,8 +9,9 @@ export interface User {
   password: string;
   firstName: string;
   lastName: string;
-  description: string;
-  birthDate: Date;
-  cvUrl: string;
   role: RoleEnum;
+  company: string;
+  birthDate: Date;
+  description: string;
+  cvUrl: string;
 }

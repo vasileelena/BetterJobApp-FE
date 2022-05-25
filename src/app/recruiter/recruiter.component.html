@@ -1,0 +1,12 @@
+<div>
+<button
+  class="btn btn-dark"
+  (click)="onAddJob()">
+  Add new job listing
+</button>
+</div>
+<div *ngFor="let job of jobList">
+  <app-job [model]="job"></app-job>
+</div>
+
+<router-outlet></router-outlet>

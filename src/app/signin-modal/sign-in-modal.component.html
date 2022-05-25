@@ -95,7 +95,30 @@
             </span>
           </span>
         </div>
-        <div class="form-group">
+        <label for="roleGroup">I am a:</label>
+        <div id="roleGroup">
+          <label>
+            <input
+              name="role"
+              type="radio"
+              [value]="roles[0]"
+              formControlName="role"
+              class="radio"
+              (click)="checkIfValid()">
+            User
+          </label>
+          <label>
+            <input
+              name="role"
+              type="radio"
+              [value]="roles[1]"
+              formControlName="role"
+              class="radio"
+              (click)="checkIfValid()">
+            Recruiter
+          </label>
+        </div>
+        <div *ngIf="formControls['role'].value === roles[0]" class="form-group">
           <label for="birthDate">Birth date</label><br>
           <input id="birthDate"
                  name="birthDate"
@@ -108,27 +131,19 @@
             You can't register to our website if you are under 16 years old!
           </span>
         </div>
-        <label for="roleGroup">I am a:</label>
-          <div id="roleGroup">
-            <label>
-              <input
-                name="role"
-                type="radio"
-                [value]="roles[0]"
-                formControlName="role"
-                class="radio">
-              User
-            </label>
-            <label>
-              <input
-                name="role"
-                type="radio"
-                [value]="roles[1]"
-                formControlName="role"
-                class="radio">
-              Recruiter
-            </label>
-          </div>
+        <div *ngIf="formControls['role'].value === roles[1]" class="form-group">
+          <label for="company">Company</label><br>
+          <input
+            id="company"
+            type="text"
+            formControlName="company"
+            class="form-control">
+          <span
+            *ngIf="!formControls['company'].valid && formControls['company'].touched"
+            class="text-danger">
+          This field is required
+          </span>
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="onCancel()"

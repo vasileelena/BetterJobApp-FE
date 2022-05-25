@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from "@angular/router";
+import {ActivatedRouteSnapshot, CanActivate, CanActivateChild, Router, RouterStateSnapshot} from "@angular/router";
 import {AuthService} from "./auth.service";
 import {RoleEnum} from "../user/user.model";
 
 @Injectable({
   providedIn: 'root'
 })
-export class RecruiterAuthGuardService implements CanActivate {
+export class RecruiterAuthGuardService implements CanActivate, CanActivateChild {
 
   constructor(private router: Router,
               private authService: AuthService) {}
@@ -20,5 +20,9 @@ export class RecruiterAuthGuardService implements CanActivate {
       () => alert("You need to have a recruiter account to access this page!")
     );
     return false;
+  }
+
+  canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+    return this.canActivate(route, state);
   }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {User} from "./user.model";
-import {UserService} from "./user.service";
+import {UserService} from "../service/user.service";
 import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
