@@ -7,7 +7,7 @@ import {LogInModalComponent} from "./login-modal/log-in-modal.component";
 import {AuthGuardService} from "./service/auth-guard.service";
 import {RecruiterAuthGuardService} from "./service/recruiter-auth-guard.service";
 import {RecruiterComponent} from "./recruiter/recruiter.component";
-import {EditJobComponent} from "./job/edit-job/edit-job.component";
+import {NewJobModalComponent} from "./job/new-job/new-job-modal.component";
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -18,8 +18,7 @@ const routes: Routes = [
     canActivate: [RecruiterAuthGuardService],
     canActivateChild: [RecruiterAuthGuardService],
     children: [
-      {path: 'edit/new', component: EditJobComponent},
-      {path: 'edit/:id', component: EditJobComponent}
+      {path: 'new', component: NewJobModalComponent}
     ]}
 ];
 

@@ -18,7 +18,7 @@ export class AuthService {
   }
 
   isUserLoggedIn() {
-    let email = sessionStorage.getItem('email');
+    let email = sessionStorage.getItem('email')!.toString();
     return !(email === '')
   }
 

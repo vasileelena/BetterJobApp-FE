@@ -7,8 +7,8 @@ export enum ExperienceEnum {
 }
 
 export enum ProgramEnum {
-  partTime,
-  fullTime,
+  part_time,
+  full_time,
   project,
   internship
 }
@@ -27,7 +27,11 @@ export enum LocationEnum {
   Ploiesti,
   Sibiu,
   Timisoara
+}
 
+export enum CurrencyEnum {
+  RON,
+  EURO
 }
 
 export enum IndustryEnum {
@@ -66,6 +70,7 @@ export interface Job {
   program: ProgramEnum;
   salaryLowerRange: number;
   salaryUpperRange: number;
+  currency: CurrencyEnum;
   location: LocationEnum;
   description: string;
 }

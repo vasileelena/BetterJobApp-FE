@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {User} from "./user.model";
+import {RoleEnum, User} from "./user.model";
 import {UserService} from "../service/user.service";
 import {HttpErrorResponse} from "@angular/common/http";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-user',
@@ -12,10 +13,13 @@ export class UserComponent implements OnInit {
 
   users: User[] = [];
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService,
+              private router: Router) { }
 
   ngOnInit(): void {
-    // this.getUsers();
+    if(sessionStorage.getItem('role') === 'RECRUITER') {
+      this.router.navigate(['recruiter/job']);
+    }
   }
 
   public getUsers(): void {

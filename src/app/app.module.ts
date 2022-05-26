@@ -1,4 +1,5 @@
 import {NgModule} from '@angular/core';
+import {NgbActiveModal, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {BrowserModule} from '@angular/platform-browser';
 
 import {AppRoutingModule} from './app-routing.module';
@@ -11,8 +12,8 @@ import {LogInModalComponent} from './login-modal/log-in-modal.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import { HomeComponent } from './home/home.component';
 import { RecruiterComponent } from './recruiter/recruiter.component';
-import { JobComponent } from './job/job/job.component';
-import { EditJobComponent } from './job/edit-job/edit-job.component';
+import { JobComponent } from './job/job.component';
+import { NewJobModalComponent } from './job/new-job/new-job-modal.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,7 @@ import { EditJobComponent } from './job/edit-job/edit-job.component';
     HomeComponent,
     RecruiterComponent,
     JobComponent,
-    EditJobComponent
+    NewJobModalComponent
   ],
   imports: [
     BrowserModule,

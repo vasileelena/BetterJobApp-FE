@@ -31,16 +31,14 @@ export class HeaderComponent implements OnInit {
 
   openLoginModal() {
     const modalOptions: NgbModalOptions = {backdrop: 'static', size: 'md'}
-    const modalInstance = this.modalService.open(LogInModalComponent, modalOptions);
+    this.modalService.open(LogInModalComponent, modalOptions);
 
-    modalInstance.result;
   }
 
   openSigninModal() {
-    const modalOptions: NgbModalOptions = {backdrop: 'static', size: 'sm'}
-    const modalInstance = this.modalService.open(SignInModalComponent, modalOptions);
+    const modalOptions: NgbModalOptions = {backdrop: 'static', size: 'md'}
+    this.modalService.open(SignInModalComponent, modalOptions);
 
-    modalInstance.result;
   }
 
 }
