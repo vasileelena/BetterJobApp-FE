@@ -2,8 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {CustomValidators} from "../custom-validators";
 import {HttpErrorResponse} from "@angular/common/http";
-import {UserService} from "../service/user.service";
-import {RoleEnum, User} from "../user/user.model";
+import {UserService} from "../services/user.service";
+import {RoleEnum, User} from "../models/user.model";
 import {Router} from "@angular/router";
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 

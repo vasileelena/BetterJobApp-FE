@@ -4,16 +4,28 @@
       <div class="row flex-fill">
         <div class="col-sm-5">
           <h4 class="h5">{{ this.model.jobTitle}}</h4>
-          <span class="badge bg-secondary">{{this.model.location.toString().split('_').join(' ')}}</span> <span class="badge bg-success">
-          {{this.model.salaryLowerRange}} - {{this.model.salaryUpperRange}} {{this.model.currency}}</span>
+          <span class="badge bg-secondary">{{this.model.location.toString().split('_').join(' ')}}</span>
+          <span class="badge bg-success">
+          {{this.model.salaryLowerRange}} - {{this.model.salaryUpperRange}} {{this.model.currency}}
+          </span>
+          <span *ngIf="model.undefinedPeriod" class="badge bg-secondary">Undefined period</span>
+          <span *ngIf="!model.undefinedPeriod" class="badge bg-secondary">{{model.period}} months</span>
+
+
         </div>
         <div class="col-sm-4 py-2">
           <span class="badge bg-secondary">{{this.model.industry.toString().split('_').join(' ')}}</span>
           <span class="badge bg-secondary">{{this.model.experience}}</span>
           <span class="badge bg-secondary">{{this.model.program.toString().split('_').join(' ')}}</span>
         </div>
-        <div class="col-sm-3 text-lg-end">
-          <a href="#" class="btn btn-primary stretched-link">Close job opening</a>
+        <div *ngIf="recruiter" class="col-sm-3 text-lg-end">
+          <button class="btn btn-primary stretched-link" >Close job opening</button>
+        </div>
+        <div *ngIf="!recruiter " class="col-sm-3 text-lg-end">
+          <button class="btn btn-primary stretched-link" (click)="applyToJob()">Apply</button>
+        </div>
+        <div *ngIf="!recruiter" class="col-sm-3 text-lg-end">
+          <button class="btn btn-primary stretched-link" (click)="saveJob()">Save</button>
         </div>
       </div>
       <div class="row">

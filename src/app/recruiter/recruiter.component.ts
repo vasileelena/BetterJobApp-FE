@@ -1,8 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Job} from "../job/job.model";
-import {JobService} from "../service/job.service";
-import {UserService} from "../service/user.service";
-import {User} from "../user/user.model";
+import {Job} from "../models/job.model";
+import {JobService} from "../services/job.service";
+import {UserService} from "../services/user.service";
+import {User} from "../models/user.model";
 import {noop, Subject, Subscription, switchMap} from "rxjs";
 import {ActivatedRoute, Router} from "@angular/router";
 import {NgbModal, NgbModalOptions} from "@ng-bootstrap/ng-bootstrap";
@@ -51,7 +51,7 @@ export class RecruiterComponent implements OnInit {
   onAddJob() {
     const modalOptions: NgbModalOptions = {backdrop: 'static', size: 'md'};
     const modalInstance = this.modalService.open(NewJobModalComponent, modalOptions);
-    modalInstance.componentInstance.userId = this.currentUserId;
+    modalInstance.componentInstance.recruiterId = this.currentUserId;
 
   }
 
@@ -61,7 +61,7 @@ export class RecruiterComponent implements OnInit {
     this.userService.getUserByEmail(userEmail).subscribe(
       (user: User) => {
         this.currentUserId = user.id;
-        this.jobService.getJobsByUserId(this.currentUserId).subscribe(
+        this.jobService.getJobsByRecruiterId(this.currentUserId).subscribe(
           (jobs: Job[]) => this.jobList = jobs
         )
       }

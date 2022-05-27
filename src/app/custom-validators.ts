@@ -1,5 +1,5 @@
 import {AbstractControl, Validators} from "@angular/forms";
-import {RoleEnum} from "./user/user.model";
+import {RoleEnum} from "./models/user.model";
 
 export class CustomValidators {
 

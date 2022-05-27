@@ -6,7 +6,7 @@
 </button>
 </div>
 <div class="container" *ngFor="let job of jobList">
-  <app-job [model]="job"></app-job>
+  <app-job [model]="job" [recruiter]="true"></app-job>
 </div>
 
 <router-outlet></router-outlet>

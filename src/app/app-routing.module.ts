@@ -4,8 +4,8 @@ import {HomeComponent} from "./home/home.component";
 import {UserComponent} from "./user/user.component";
 import {SignInModalComponent} from "./signin-modal/sign-in-modal.component";
 import {LogInModalComponent} from "./login-modal/log-in-modal.component";
-import {AuthGuardService} from "./service/auth-guard.service";
-import {RecruiterAuthGuardService} from "./service/recruiter-auth-guard.service";
+import {AuthGuardService} from "./services/auth-guard.service";
+import {RecruiterAuthGuardService} from "./services/recruiter-auth-guard.service";
 import {RecruiterComponent} from "./recruiter/recruiter.component";
 import {NewJobModalComponent} from "./job/new-job/new-job-modal.component";
 

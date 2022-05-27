@@ -1,2 +1,132 @@
 <router-outlet></router-outlet>
+<div class="container">
+  <div class="row">
+    <div class="col-3">
+      <form [formGroup]="filterForm" (ngSubmit)="onSubmit()">
+        <div class="container">
+          <div class="row">
+            <h5>Industry</h5>
+            <div class="form-check" *ngFor="let industry of industryArray">
+              <input
+                type="checkbox"
+                formArrayName="selectedIndustries"
+                class="form-check-input"
+                [value]="industry"
+                (change)="onCheckedIndustry($event, 'selectedIndustries')">
+              {{industry.split('_').join(' ')}}<br>
+            </div>
+          </div>
+        </div>
+
+        <div class="container">
+          <div class="row">
+            <h5>Type of program</h5>
+            <div class="form-check" *ngFor="let program of programArray">
+              <input
+                type="checkbox"
+                formArrayName="selectedPrograms"
+                class="form-check-input"
+                [value]="program"
+                (change)="onCheckedIndustry($event, 'selectedPrograms')">
+              {{program.split('_').join(' ')}}<br>
+            </div>
+          </div>
+        </div>
+
+        <div class="container">
+          <div class="row">
+            <h5>Experience</h5>
+            <div class="form-check" *ngFor="let experience of experienceArray">
+              <input
+                type="checkbox"
+                formArrayName="selectedExperiences"
+                class="form-check-input"
+                [value]="experience"
+                (change)="onCheckedIndustry($event, 'selectedExperiences')">
+              {{experience}}<br>
+            </div>
+          </div>
+        </div>
+
+        <div class="container">
+          <div class="row">
+            <h5>Location</h5>
+            <div class="form-check" *ngFor="let location of locationArray">
+              <input
+                type="checkbox"
+                formArrayName="selectedLocations"
+                class="form-check-input"
+                [value]="location"
+                #locCheckbox
+                (change)="onCheckedIndustry($event, 'selectedLocations')">
+              {{location.split('_').join(' ')}}<br>
+            </div>
+          </div>
+        </div>
+
+        <div class="container">
+          <div class="row">
+            <h5>Period of work</h5>
+            <div class="form-check">
+              <input
+                type="checkbox"
+                formControlName="undefinedPeriod"
+                class="form-check-input"
+                checked="true"
+                #undefinedPeriod>
+              Undefined period
+            </div>
+            <div *ngIf="!undefinedPeriod.checked"
+                 class="form-group ">
+              <label for="period">Period (in months)</label>
+              <input
+                id="period"
+                type="number"
+                formControlName="period"
+                class="form-control col-3">
+            </div>
+          </div>
+        </div>
+
+        <div class="container">
+          <div class="row">
+            <h5>Minimum salary</h5>
+            <div class="form-row">
+              <div class="form-group col-4">
+                <input
+                  id="salaryLowerRange"
+                  type="number"
+                  formControlName="salaryLowerRange"
+                  class="form-control">
+              </div>
+              <div class="form-group col-4">
+                <select
+                  id="currency"
+                  formControlName="currency"
+                  class="custom-select">
+                  <option value="0"> Ron </option>
+                  <option value="1"> Euro </option>
+                  <option value="2"> All </option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <button type="button" class="btn btn-danger" (click)="onReset()"
+          >Reset filters</button>
+          <button
+            class="btn btn-primary"
+            type="submit">
+            Apply filters
+          </button>
+        </div>
+      </form>
+    </div>
+    <div class="col-9">
+      <div class="container" *ngFor="let job of displayedJobs | filterJobs: filterInputs">
+        <app-job [model]="job" [recruiter]="false" [userId]="currentUserId"></app-job>
+      </div>
+    </div>
+  </div>
+</div>
+
 

@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthService} from "../service/auth.service";
+import {AuthService} from "../services/auth.service";
 import {NgbActiveModal, NgbModal, NgbModalOptions} from "@ng-bootstrap/ng-bootstrap";
 import {LogInModalComponent} from "../login-modal/log-in-modal.component";
 import {Router} from "@angular/router";

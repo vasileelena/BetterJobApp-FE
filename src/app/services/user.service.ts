@@ -2,8 +2,10 @@ import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import { map } from 'rxjs/operators';
-import {User} from "../user/user.model";
+import {User} from "../models/user.model";
 import {environment} from "../../environments/environment";
+import {Job} from "../models/job.model";
+import {UserJob} from "../models/user-job-model";
 
 @Injectable({
   providedIn: 'root'
@@ -31,5 +33,19 @@ export class UserService{
 
   public getUserByEmail(email: string): Observable<User> {
     return this.http.get<User>(this.url + '/email/' + email.toString());
+  }
+
+  public getAllJobs(): Observable<Job[]> {
+    return this.http.get<Job[]>(this.url + '/job/all');
+  }
+
+  public addJobToUser(userId: number, jobId: number, apply: boolean): Observable<UserJob> {
+    console.log(userId, jobId, apply);
+    return this.http.post<UserJob>(this.url + '/job/addJobToUser',
+      {
+        'userId': userId,
+        'jobId': jobId,
+        'apply': apply
+      });
   }
 }

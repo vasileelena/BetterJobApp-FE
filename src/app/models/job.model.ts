@@ -61,7 +61,7 @@ export enum IndustryEnum {
 
 export interface Job {
   id: number;
-  userId: number;
+  recruiterId: number;
   jobTitle: string;
   industry: IndustryEnum;
   experience: ExperienceEnum;

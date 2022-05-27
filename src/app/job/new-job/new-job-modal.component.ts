@@ -1,8 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {CurrencyEnum, ExperienceEnum, IndustryEnum, Job, LocationEnum, ProgramEnum} from "../job.model";
-import {JobService} from "../../service/job.service";
+import {CurrencyEnum, ExperienceEnum, IndustryEnum, Job, LocationEnum, ProgramEnum} from "../../models/job.model";
+import {JobService} from "../../services/job.service";
 import {CustomValidators} from "../../custom-validators";
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 import {Subject} from "rxjs";
@@ -22,7 +22,7 @@ export class NewJobModalComponent implements OnInit {
   locationArray: string[] = [];
 
   @Input()
-  private userId!: number;
+  private recruiterId!: number;
 
 
   constructor(private route: ActivatedRoute,
@@ -39,7 +39,7 @@ export class NewJobModalComponent implements OnInit {
   onSubmit(){
     console.log(this.form.value);
     this.jobService.addJob({
-      userId: this.userId,
+      recruiterId: this.recruiterId,
       ...this.form.value
     }).subscribe(
       () => {
@@ -54,7 +54,7 @@ export class NewJobModalComponent implements OnInit {
       () => {
         this.modalService.dismiss();
         // emit that the jobs list has changed
-        this.jobService.getJobsByUserId(this.userId).pipe(
+        this.jobService.getJobsByRecruiterId(this.recruiterId).pipe(
           map((jobs: Job[]) => {
               this.jobService.jobsChanged.next(jobs);
             }

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../environments/environment";
 import {Observable, Subject} from "rxjs";
-import {Job} from "../job/job.model";
+import {Job} from "../models/job.model";
 
 @Injectable({
   providedIn: 'root'
@@ -14,12 +14,8 @@ export class JobService {
 
   constructor(private http: HttpClient) { }
 
-  public getJobsByUserId(userId: number): Observable<Job[]> {
-    return this.http.get<Job[]>(this.url + '/userId/' + userId.toString());
-  }
-
-  public getJobById(id: number): Observable<Job> {
-    return this.http.get<Job>(this.url + id.toString());
+  public getJobsByRecruiterId(recruiterId: number): Observable<Job[]> {
+    return this.http.get<Job[]>(this.url + '/recruiterId/' + recruiterId.toString());
   }
 
   public addJob(job: Job): Observable<Job> {

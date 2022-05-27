@@ -14,6 +14,7 @@ import { HomeComponent } from './home/home.component';
 import { RecruiterComponent } from './recruiter/recruiter.component';
 import { JobComponent } from './job/job.component';
 import { NewJobModalComponent } from './job/new-job/new-job-modal.component';
+import { FilterJobsPipe } from './pipes/filter-jobs.pipe';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { NewJobModalComponent } from './job/new-job/new-job-modal.component';
     HomeComponent,
     RecruiterComponent,
     JobComponent,
-    NewJobModalComponent
+    NewJobModalComponent,
+    FilterJobsPipe
   ],
   imports: [
     BrowserModule,
