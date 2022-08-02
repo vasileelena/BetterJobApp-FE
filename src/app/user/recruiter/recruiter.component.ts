@@ -15,7 +15,7 @@ import {map} from "rxjs/operators";
   templateUrl: './recruiter.component.html',
   styleUrls: ['./recruiter.component.css']
 })
-export class RecruiterComponent implements OnInit {
+export class RecruiterComponent implements OnInit, OnDestroy {
 
   currentUserId: any;
   jobList: Job[] = [];
@@ -35,21 +35,10 @@ export class RecruiterComponent implements OnInit {
         this.jobList = jobs;
       }
     );
+  }
 
-
-
-    // this.userService.getUserByEmail(userEmail).pipe(
-    //   map(
-    //   (user: User) => {
-    //     this.currentUserId = user.id;
-    //     return this.jobService.getJobsByUserId(this.currentUserId).pipe(
-    //       map(
-    //         (jobs: Job[]) => this.jobList = jobs
-    //         )).subscribe();
-    //     }
-    //   )).subscribe();
-
-
+  ngOnDestroy(): void {
+    this.jobsChangedSubscription.unsubscribe();
   }
 
   onAddJob() {
@@ -59,22 +48,22 @@ export class RecruiterComponent implements OnInit {
 
   }
 
-  getJobs() {
+  getJobs(): void {
     let userEmail = sessionStorage.getItem('email')!.toString();
 
-    this.userService.getUserByEmail(userEmail).subscribe(
+    this.userService.getUserByEmail(userEmail)
+      .pipe(switchMap(
       (user: User) => {
         this.currentUserId = user.id;
-        this.jobService.getJobsByRecruiterId(this.currentUserId).subscribe(
+        return this.jobService.getJobsByRecruiterId(this.currentUserId);
+      }))
+      .subscribe(
           (jobs: Job[]) => {
             this.jobList = jobs
             if(this.router.url.toString().split('/').length === 4) {
               this.onAddJob();
             }
-          }
-        )
-      }
-    );
+          });
   }
 
 }

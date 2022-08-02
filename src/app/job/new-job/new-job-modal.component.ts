@@ -36,20 +36,20 @@ export class NewJobModalComponent implements OnInit {
     this.initEnums();
   }
 
-  onSubmit(){
-    console.log(this.form.value);
+  /**
+   * Submit the form and close the modal
+   */
+  onSubmit() : void{
     this.jobService.addJob({
       recruiterId: this.recruiterId,
       ...this.form.value
-    }).subscribe(
-      () => {
-        this.onCancel();
-      }
-    );
-
+    }).subscribe(() => this.closeModal());
   }
 
-  onCancel() {
+  /**
+   * Action to perform when closing the modal
+   */
+  closeModal(): void {
     this.router.navigate(['recruiter/job']).then(
       () => {
         this.modalService.dismiss();
@@ -63,7 +63,10 @@ export class NewJobModalComponent implements OnInit {
     );
   }
 
-  private initForm() {
+  /**
+   * Initialize the form
+   */
+  private initForm(): void {
     this.form = this.formBuilder.group(
       {
         "jobTitle": ["", Validators.required],
@@ -78,11 +81,13 @@ export class NewJobModalComponent implements OnInit {
         "location": [null, Validators.required],
         "description": [null, Validators.required]
       }
-    )
+    );
   }
 
-
-  private initEnums() {
+  /**
+   * Initialize the enums used for the form
+   */
+  private initEnums(): void {
     this.industryArray = Object.keys(IndustryEnum).filter((key: any) => !isNaN(Number(IndustryEnum[key])));
     this.experienceArray = Object.keys(ExperienceEnum).filter((key: any) => !isNaN(Number(ExperienceEnum[key])));
     this.programArray = Object.keys(ProgramEnum).filter((key: any) => !isNaN(Number(ProgramEnum[key])));
