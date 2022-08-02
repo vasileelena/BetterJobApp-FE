@@ -21,10 +21,10 @@
         <div *ngIf="recruiter" class="col-sm-3 text-lg-end">
           <button class="btn btn-primary stretched-link" >Close job opening</button>
         </div>
-        <div *ngIf="!recruiter " class="col-sm-3 text-lg-end">
+        <div *ngIf="!recruiter && !applied" class="col-sm-3 text-lg-end">
           <button class="btn btn-primary stretched-link" (click)="applyToJob()">Apply</button>
         </div>
-        <div *ngIf="!recruiter" class="col-sm-3 text-lg-end">
+        <div *ngIf="!recruiter && !saved" class="col-sm-3 text-lg-end">
           <button class="btn btn-primary stretched-link" (click)="saveJob()">Save</button>
         </div>
       </div>

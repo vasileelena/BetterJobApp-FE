@@ -20,4 +20,14 @@ export class AuthGuardService implements CanActivate {
     return false;
   }
 
+  canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+    if (this.authService.isUserLoggedIn())
+      return true;
+
+    this.router.navigate(['/login']).then(
+      () => alert("You need to have an account to access this page!")
+    );
+    return false;
+  }
+
 }

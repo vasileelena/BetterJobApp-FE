@@ -6,6 +6,7 @@ import {Router} from "@angular/router";
 import {CurrencyEnum, ExperienceEnum, IndustryEnum, Job, LocationEnum, ProgramEnum} from "../models/job.model";
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {JobFilterInputs} from "../models/job-filter-inputs.model";
+import {finalize, switchMap} from "rxjs";
 
 @Component({
   selector: 'app-user',
@@ -13,9 +14,12 @@ import {JobFilterInputs} from "../models/job-filter-inputs.model";
   styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit {
+  isInitialised: boolean = false;
   currentUserId: any;
 
   displayedJobs: Job [] = [];
+  savedJobs: Job[] = [];
+  appliedJobs: Job[] = [];
 
   industryArray: string[] = [];
   experienceArray: string[] = [];
@@ -83,17 +87,34 @@ export class UserComponent implements OnInit {
 
   }
 
+  isJobSaved(job : Job): boolean {
+    return this.savedJobs.filter((j: Job) => j.id === job.id).length === 1;
+
+  }
+
+  isJobApplied(job : Job): boolean {
+    return this.appliedJobs.filter((j: Job) => j.id === job.id).length === 1;
+  }
+
   private getAllJobs() {
     let userEmail = sessionStorage.getItem('email')!.toString();
 
-    this.userService.getUserByEmail(userEmail).subscribe(
-      (user: User) => {
-        this.currentUserId = user.id;
-        this.userService.getAllJobs().subscribe(
-          (jobs: Job[]) => this.displayedJobs = jobs
-        )
-      }
-    );
+    this.userService.getUserByEmail(userEmail)
+        .pipe(
+            switchMap((user: User) => {
+              this.currentUserId = user.id;
+              return this.userService.getSavedJobs(this.currentUserId);
+            }),
+            switchMap((jobs: Job[]) => {
+              this.savedJobs = jobs;
+              return this.userService.getAppliedJobs(this.currentUserId);
+            }),
+            switchMap((jobs: Job[]) => {
+              this.appliedJobs = jobs;
+              return this.userService.getAllJobs();
+            }))
+        .pipe(finalize(() => this.isInitialised = true))
+        .subscribe((jobs: Job[]) => this.displayedJobs = jobs);
   }
 
   private initForm() {

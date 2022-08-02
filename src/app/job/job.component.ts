@@ -16,10 +16,15 @@ export class JobComponent implements OnInit {
   @Input() recruiter: boolean;
   // @ts-ignore
   @Input() userId: number;
+  // @ts-ignore
+  @Input() saved: boolean;
+  // @ts-ignore
+  @Input() applied: boolean;
 
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
+
   }
 
   applyToJob() {

@@ -13,5 +13,5 @@ export interface User {
   company: string;
   birthDate: Date;
   description: string;
-  cvUrl: string;
+  cv: File;
 }

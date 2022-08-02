@@ -23,8 +23,8 @@ export class UserService{
     return this.http.post<User>( environment.apiBaseUrl + '/signin', user);
   }
 
-  public updateUser(user: User): Observable<User> {
-    return this.http.put<User>(this.url + '/update', user);
+  public updateUser(user: User): Observable<void> {
+    return this.http.put<void>(this.url + '/update', user);
   }
 
   public deleteUser(id: number): Observable<void> {
@@ -48,4 +48,20 @@ export class UserService{
         'apply': apply
       });
   }
+
+  public getSavedJobs(userId: number): Observable<Job[]> {
+    return this.http.get<Job[]>(this.url + '/jobs/saved/' + userId.toString());
+  }
+
+  public getAppliedJobs(userId: number): Observable<Job[]> {
+    return this.http.get<Job[]>(this.url + '/jobs/applied/' + userId.toString());
+  }
+
+  public uploadCv(file: File, userId: number): Observable<any> {
+    const formData: FormData = new FormData();
+    formData.append('file', file);
+
+    return this.http.post(this.url + "/cv/" + userId.toString(), formData);
+  }
+
 }

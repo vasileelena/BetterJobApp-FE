@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {UserService} from "./user.service";
-import {User} from "../models/user.model";
+import {RoleEnum, User} from "../models/user.model";
 import {BehaviorSubject, Observable} from "rxjs";
 import {environment} from "../../environments/environment";
 import {HttpClient} from "@angular/common/http";
@@ -26,6 +26,16 @@ export class AuthService {
 
     return true;
 
+  }
+
+  isUserRecruiter() {
+    if(this.isUserLoggedIn()) {
+      if(sessionStorage.getItem('role') === 'RECRUITER'){
+        return true;
+      }
+        return false;
+    }
+    return false;
   }
 
   logOut() {

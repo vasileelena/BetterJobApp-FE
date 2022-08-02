@@ -1,13 +1,13 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Job} from "../models/job.model";
-import {JobService} from "../services/job.service";
-import {UserService} from "../services/user.service";
-import {User} from "../models/user.model";
+import {Job} from "../../models/job.model";
+import {JobService} from "../../services/job.service";
+import {UserService} from "../../services/user.service";
+import {User} from "../../models/user.model";
 import {noop, Subject, Subscription, switchMap} from "rxjs";
 import {ActivatedRoute, Router} from "@angular/router";
 import {NgbModal, NgbModalOptions} from "@ng-bootstrap/ng-bootstrap";
-import {SignInModalComponent} from "../signin-modal/sign-in-modal.component";
-import {NewJobModalComponent} from "../job/new-job/new-job-modal.component";
+import {SignInModalComponent} from "../../home/signin-modal/sign-in-modal.component";
+import {NewJobModalComponent} from "../../job/new-job/new-job-modal.component";
 import {map} from "rxjs/operators";
 
 @Component({
@@ -31,8 +31,12 @@ export class RecruiterComponent implements OnInit {
   ngOnInit(): void {
     this.getJobs();
     this.jobsChangedSubscription = this.jobService.jobsChanged.subscribe(
-      (jobs: Job[]) => this.jobList = jobs
+      (jobs: Job[]) => {
+        this.jobList = jobs;
+      }
     );
+
+
 
     // this.userService.getUserByEmail(userEmail).pipe(
     //   map(
@@ -62,7 +66,12 @@ export class RecruiterComponent implements OnInit {
       (user: User) => {
         this.currentUserId = user.id;
         this.jobService.getJobsByRecruiterId(this.currentUserId).subscribe(
-          (jobs: Job[]) => this.jobList = jobs
+          (jobs: Job[]) => {
+            this.jobList = jobs
+            if(this.router.url.toString().split('/').length === 4) {
+              this.onAddJob();
+            }
+          }
         )
       }
     );

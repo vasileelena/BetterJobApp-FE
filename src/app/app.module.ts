@@ -7,14 +7,16 @@ import {AppComponent} from './app.component';
 import {UserComponent} from './user/user.component';
 import {HttpClientModule} from "@angular/common/http";
 import {HeaderComponent} from './header/header.component';
-import {SignInModalComponent} from './signin-modal/sign-in-modal.component';
-import {LogInModalComponent} from './login-modal/log-in-modal.component';
+import {SignInModalComponent} from './home/signin-modal/sign-in-modal.component';
+import {LogInModalComponent} from './home/login-modal/log-in-modal.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import { HomeComponent } from './home/home.component';
-import { RecruiterComponent } from './recruiter/recruiter.component';
+import { RecruiterComponent } from './user/recruiter/recruiter.component';
 import { JobComponent } from './job/job.component';
 import { NewJobModalComponent } from './job/new-job/new-job-modal.component';
 import { FilterJobsPipe } from './pipes/filter-jobs.pipe';
+import { UserJobsComponent } from './user/user-jobs/user-jobs.component';
+import { EditUserComponent } from './user/edit-user/edit-user.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { FilterJobsPipe } from './pipes/filter-jobs.pipe';
     RecruiterComponent,
     JobComponent,
     NewJobModalComponent,
-    FilterJobsPipe
+    FilterJobsPipe,
+    UserJobsComponent,
+    EditUserComponent
   ],
   imports: [
     BrowserModule,

@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from "../services/auth.service";
 import {NgbActiveModal, NgbModal, NgbModalOptions} from "@ng-bootstrap/ng-bootstrap";
-import {LogInModalComponent} from "../login-modal/log-in-modal.component";
+import {LogInModalComponent} from "../home/login-modal/log-in-modal.component";
 import {Router} from "@angular/router";
-import {SignInModalComponent} from "../signin-modal/sign-in-modal.component";
+import {SignInModalComponent} from "../home/signin-modal/sign-in-modal.component";
 
 @Component({
   selector: 'app-header',
@@ -27,6 +27,10 @@ export class HeaderComponent implements OnInit {
 
   isUserLoggedIn(): boolean {
     return this.authService.isUserLoggedIn();
+  }
+
+  isUserRecruiter(): boolean {
+    return this.authService.isUserRecruiter();
   }
 
   openLoginModal() {
