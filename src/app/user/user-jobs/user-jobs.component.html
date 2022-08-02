@@ -1,0 +1,24 @@
+<h3>Saved jobs</h3>
+<section *ngIf="isInitialised">
+  <div class="container" *ngFor="let job of savedJobs">
+    <app-job
+      [model]="job"
+      [recruiter]="false"
+      [userId]="currentUserId"
+      [applied]="isJobApplied(job)"
+      [saved]="isJobSaved(job)"
+    ></app-job>
+  </div>
+
+  <h3>Applied jobs</h3>
+  <div class="container" *ngFor="let job of appliedJobs">
+    <app-job
+      [model]="job"
+      [recruiter]="false"
+      [userId]="currentUserId"
+      [applied]="isJobApplied(job)"
+      [saved]="isJobSaved(job)"
+    ></app-job>
+  </div>
+</section>
+
