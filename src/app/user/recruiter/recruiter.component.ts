@@ -41,11 +41,10 @@ export class RecruiterComponent implements OnInit, OnDestroy {
     this.jobsChangedSubscription.unsubscribe();
   }
 
-  onAddJob() {
+  onAddJob(): void {
     const modalOptions: NgbModalOptions = {backdrop: 'static', size: 'md'};
     const modalInstance = this.modalService.open(NewJobModalComponent, modalOptions);
     modalInstance.componentInstance.recruiterId = this.currentUserId;
-
   }
 
   getJobs(): void {

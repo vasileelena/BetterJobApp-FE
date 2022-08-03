@@ -1,4 +1,4 @@
-<div class="card mb-3">
+<div class="card mb-3" *ngIf="isInitialised">
   <div class="card-body">
     <div class="d-flex flex-column">
       <div class="row flex-fill">
@@ -20,6 +20,9 @@
         </div>
         <div *ngIf="recruiter" class="col-sm-3 text-lg-end">
           <button class="btn btn-primary stretched-link" >Close job opening</button>
+        </div>
+        <div *ngIf="recruiter" class="col-sm-3 text-lg-end">
+          {{applicants.length}} applicants
         </div>
         <div *ngIf="!recruiter && !applied" class="col-sm-3 text-lg-end">
           <button class="btn btn-primary stretched-link" (click)="applyToJob()">Apply</button>

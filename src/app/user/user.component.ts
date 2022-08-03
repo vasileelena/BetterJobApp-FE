@@ -30,8 +30,7 @@ export class UserComponent implements OnInit {
   filterInputs!: JobFilterInputs;
   filterApplied = false;
 
-  // @ts-ignore
-  @ViewChild('locCheckbox') locationCheckbox;
+  @ViewChild('locCheckbox') locationCheckbox: any;
 
   constructor(private userService: UserService,
               private router: Router,

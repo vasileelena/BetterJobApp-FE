@@ -80,8 +80,6 @@
 <!--</form>-->
 <h3>Upload cv</h3>
 <div>
-  <label class="btn btn-default">
-    <input type="file" (change)="selectFile($event)" />
-  </label>
-  <button (click)="onSubmitCv()">Upload</button>
+  <button (click)="onCvAdded()">Upload</button>
+  <input #fileInput name="file" type="file" (change)="onCvAdded()" />
 </div>

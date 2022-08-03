@@ -22,7 +22,7 @@ export class NewJobModalComponent implements OnInit {
   locationArray: string[] = [];
 
   @Input()
-  private recruiterId!: number;
+  private recruiterId: number;
 
 
   constructor(private route: ActivatedRoute,
