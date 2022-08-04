@@ -81,5 +81,5 @@
 <h3>Upload cv</h3>
 <div>
   <button (click)="onCvAdded()">Upload</button>
-  <input #fileInput name="file" type="file" (change)="onCvAdded()" />
+  <input #fileInput name="file" type="file" (change)="onFileSelected($event)" />
 </div>

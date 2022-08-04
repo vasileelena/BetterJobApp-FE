@@ -15,7 +15,7 @@ import {switchMap} from "rxjs";
 export class EditUserComponent implements OnInit {
 
   form: FormGroup = new FormGroup({});
-  currentFile: File;
+  selectedFile: File;
   selectedFiles: FileList;
   passRegex: RegExp = /^(?=.*\d)(?=.*[!.@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
   roles: RoleEnum[] = [RoleEnum.USER, RoleEnum.RECRUITER];
@@ -56,34 +56,19 @@ export class EditUserComponent implements OnInit {
     );
   }
 
-  selectFile(event: any) {
-    this.selectedFiles = event.target.files;
-  }
-
   onSubmit() {
 
   }
 
-  onCvAdded(): void {
-    // this.currentFile = this.selectedFiles.item(0)! ;
-    // let userEmail = sessionStorage.getItem('email')!.toString();
-    //
-    // this.userService.getUserByEmail(userEmail)
-    //   .pipe(
-    //     switchMap(
-    //     (user: User) => {
-    //       let id = user.id;
-    //       return this.userService.uploadCv(this.currentFile, id);
-    //       })
-    //   )
-    //   .subscribe(
-    //       () => console.log("success")
-    //     );
+  onFileSelected(event: any) {
+    this.selectedFile = <File>event.target.files[0];
+  }
 
-    // check if a file has been selected
-    if(this.fileInput?.nativeElement?.files?.length > 0) {
-      this.userService.uploadCv(this.fileInput.nativeElement.files[0], this.currentId);
-    }
+  onCvAdded(): void {
+    this.userService.uploadCv(this.selectedFile, this.currentId).subscribe(
+      (message: string) => this.fileInput.nativeElement.value = '',
+      () => this.fileInput.nativeElement.value = ''
+    );
   }
 
 }

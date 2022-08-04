@@ -57,12 +57,11 @@ export class UserService{
     return this.http.get<Job[]>(this.url + '/jobs/applied/' + userId.toString());
   }
 
-  public uploadCv(file: any, userId: number): Observable<any> {
+  public uploadCv(file: File, userId: number): Observable<string> {
     const formData: FormData = new FormData();
-    formData.append('file', file);
+    formData.append('file', file, 'CV_' + userId.toString());
 
-    //TODO de ce nu merge postu asta
-    return this.http.post<any>(this.url + "/cv/" + userId.toString(), formData);
+    return this.http.post<string>(this.url + "/cv/" + userId.toString(), formData);
   }
 
 }
