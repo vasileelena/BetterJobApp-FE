@@ -1,41 +1,37 @@
-<div class="card mb-3" *ngIf="isInitialised">
-  <div class="card-body">
-    <div class="d-flex flex-column">
+<a [routerLink]="['/user/search/job-details', model.id]" class="job-card-button">
+  <div class="card mb-4" *ngIf="isInitialised">
+    <div class="card-body">
       <div class="row flex-fill">
         <div class="col-sm-5">
-          <h4 class="h5">{{ this.model.jobTitle}}</h4>
-          <span class="badge bg-secondary">{{this.model.location.toString().split('_').join(' ')}}</span>
-          <span class="badge bg-success">
-          {{this.model.salaryLowerRange}} - {{this.model.salaryUpperRange}} {{this.model.currency}}
-          </span>
-          <span *ngIf="model.undefinedPeriod" class="badge bg-secondary">Undefined period</span>
-          <span *ngIf="!model.undefinedPeriod" class="badge bg-secondary">{{model.period}} months</span>
+          <h4 class="h4">{{ this.model.jobTitle}}</h4>
+          <p>Company</p>
+          <div class="d-flex gap-1 align-items-center">
+            <fa-icon class="job-card-icon" [icon]="iconLocation"></fa-icon>
+            <p class="job-card-tag">{{this.model.location.toString().split('_').join(' ')}}</p>
+          </div>
+          <div class="d-flex gap-1 align-items-center">
+            <fa-icon class="job-card-icon" [icon]="iconSalary"></fa-icon>
+            <p class="job-card-tag">
+              {{this.model.salaryLowerRange}} - {{this.model.salaryUpperRange}} {{this.model.currency}}
+            </p>
+          </div>
+          <div class="d-flex gap-1 align-items-center">
+            <fa-icon class="job-card-icon" [icon]="iconExperience"></fa-icon>
+            <p class="job-card-tag">{{this.model.experience}}</p>
+          </div>
+        </div>
 
-
+        <div *ngIf="recruiter" class="col-sm-2 text-lg-end ms-auto">
+          <button class="btn btn-primary job-button">Close job opening</button>
+          <p> {{applicants.length}} applicants </p>
         </div>
-        <div class="col-sm-4 py-2">
-          <span class="badge bg-secondary">{{this.model.industry.toString().split('_').join(' ')}}</span>
-          <span class="badge bg-secondary">{{this.model.experience}}</span>
-          <span class="badge bg-secondary">{{this.model.program.toString().split('_').join(' ')}}</span>
-        </div>
-        <div *ngIf="recruiter" class="col-sm-3 text-lg-end">
-          <button class="btn btn-primary stretched-link" >Close job opening</button>
-        </div>
-        <div *ngIf="recruiter" class="col-sm-3 text-lg-end">
-          {{applicants.length}} applicants
-        </div>
-        <div *ngIf="!recruiter && !applied" class="col-sm-3 text-lg-end">
+        <div *ngIf="!recruiter && !applied" class="col-sm-2 text-lg-end job-button ms-auto">
           <button class="btn btn-primary stretched-link" (click)="applyToJob()">Apply</button>
         </div>
-        <div *ngIf="!recruiter && !saved" class="col-sm-3 text-lg-end">
+        <div *ngIf="!recruiter && !saved" class="col-sm-2 text-lg-end job-button ms-auto">
           <button class="btn btn-primary stretched-link" (click)="saveJob()">Save</button>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-5">
-        <h6 class="h6"> {{this.model.description}}</h6>
         </div>
       </div>
     </div>
   </div>
-</div>
+</a>

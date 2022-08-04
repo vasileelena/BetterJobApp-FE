@@ -10,21 +10,27 @@ import {User} from "../models/user.model";
 })
 export class JobService {
 
-  private readonly url: string = environment.apiBaseUrl + '/recruiter/job';
+  private readonly recruiterBaseUrl: string = environment.apiBaseUrl + '/recruiter/job';
+  private readonly userBaseUrl: string = environment.apiBaseUrl + '/user';
+
 
   jobsChanged = new Subject<Job[]>();
 
   constructor(private http: HttpClient) { }
 
+  public getJobById(jobId: number): Observable<Job> {
+    return this.http.get<Job>(this.userBaseUrl + '/job/' + jobId.toString());
+  }
+
   public getJobsByRecruiterId(recruiterId: number): Observable<Job[]> {
-    return this.http.get<Job[]>(this.url + '/recruiterId/' + recruiterId.toString());
+    return this.http.get<Job[]>(this.recruiterBaseUrl + '/recruiterId/' + recruiterId.toString());
   }
 
   public addJob(job: Job): Observable<Job> {
-    return this.http.post<Job>(this.url + '/add', job);
+    return this.http.post<Job>(this.recruiterBaseUrl + '/add', job);
   }
 
   public getApplicantsForJob(jobId: number): Observable<User[]> {
-    return this.http.get<User[]>(this.url + '/jobId/' + jobId + '/applicants');
+    return this.http.get<User[]>(this.recruiterBaseUrl + '/jobId/' + jobId + '/applicants');
   }
 }

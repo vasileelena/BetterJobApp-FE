@@ -10,10 +10,10 @@ import {finalize, switchMap} from "rxjs";
 
 @Component({
   selector: 'app-user',
-  templateUrl: './user.component.html',
-  styleUrls: ['./user.component.css']
+  templateUrl: './search-jobs.component.html',
+  styleUrls: ['./search-jobs.component.css']
 })
-export class UserComponent implements OnInit {
+export class SearchJobsComponent implements OnInit {
   isInitialised: boolean = false;
   currentUserId: any;
 

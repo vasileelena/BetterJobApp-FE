@@ -1,12 +1,14 @@
-<div>
-<button
-  class="btn btn-dark"
-  (click)="onAddJob()">
-  Add new job listing
-</button>
-</div>
-<div class="container" *ngFor="let job of jobList">
-  <app-job [model]="job" [recruiter]="true"></app-job>
+<div class="container d-flex flex-column gap-3">
+  <button
+    id="add-job-button"
+    class="btn btn-dark ms-auto"
+    (click)="onAddJob()">
+    <fa-icon class="button-icon" [icon]="iconAddJob"></fa-icon>
+    New job listing
+  </button>
+  <div class="container" *ngFor="let job of jobList">
+    <app-job [model]="job" [recruiter]="true"></app-job>
+  </div>
 </div>
 
 <router-outlet></router-outlet>

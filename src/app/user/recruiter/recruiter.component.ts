@@ -3,12 +3,12 @@ import {Job} from "../../models/job.model";
 import {JobService} from "../../services/job.service";
 import {UserService} from "../../services/user.service";
 import {User} from "../../models/user.model";
-import {noop, Subject, Subscription, switchMap} from "rxjs";
+import {Subscription, switchMap} from "rxjs";
 import {ActivatedRoute, Router} from "@angular/router";
 import {NgbModal, NgbModalOptions} from "@ng-bootstrap/ng-bootstrap";
-import {SignInModalComponent} from "../../home/signin-modal/sign-in-modal.component";
 import {NewJobModalComponent} from "../../job/new-job/new-job-modal.component";
-import {map} from "rxjs/operators";
+import * as fa from '@fortawesome/free-solid-svg-icons'
+import {IconDefinition} from "@fortawesome/free-brands-svg-icons";
 
 @Component({
   selector: 'app-recruiter',
@@ -17,10 +17,14 @@ import {map} from "rxjs/operators";
 })
 export class RecruiterComponent implements OnInit, OnDestroy {
 
+  // FontAwesome icons declaration
+  readonly iconAddJob: IconDefinition = fa.faPlus;
+
   currentUserId: any;
   jobList: Job[] = [];
 
   jobsChangedSubscription!: Subscription;
+
 
   constructor(private jobService: JobService,
               private userService: UserService,

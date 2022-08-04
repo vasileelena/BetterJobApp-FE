@@ -20,7 +20,7 @@
       <li class="nav-item">
         <a class="nav-link"
            routerLinkActive="active"
-           routerLink="{{(isUserLoggedIn() && isUserRecruiter()) ? '/recruiter/job' : '/user'}}">
+           routerLink="{{(isUserLoggedIn() && isUserRecruiter()) ? '/recruiter/job' : '/user/search'}}">
           {{(isUserLoggedIn() && isUserRecruiter()) ? 'My job listings': 'Search job' }}
         </a>
       </li>

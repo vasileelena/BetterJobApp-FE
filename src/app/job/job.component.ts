@@ -1,9 +1,11 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Job} from "../models/job.model";
-import {UserJob} from "../models/user-job-model";
 import {UserService} from "../services/user.service";
 import {JobService} from "../services/job.service";
 import {User} from "../models/user.model";
+import * as fa from '@fortawesome/free-solid-svg-icons'
+import {IconDefinition} from "@fortawesome/free-brands-svg-icons";
+
 
 @Component({
   selector: 'app-job',
@@ -20,6 +22,11 @@ export class JobComponent implements OnInit {
 
   isInitialised: boolean = false;
   applicants: User[] = [];
+
+  // FontAwesome icons declaration
+  readonly iconLocation: IconDefinition = fa.faMapPin;
+  readonly iconSalary: IconDefinition = fa.faEuroSign;
+  readonly iconExperience: IconDefinition = fa.faAward;
 
   constructor(private userService: UserService,
               private jobService: JobService) { }

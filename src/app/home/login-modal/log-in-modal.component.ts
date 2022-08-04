@@ -57,7 +57,7 @@ export class LogInModalComponent implements OnInit {
 
   onCancel() {
     this.form.reset();
-    this.router.navigate(['/user']).then(
+    this.router.navigate(['/user/search']).then(
       () => this.modalService.dismiss()
     );
 

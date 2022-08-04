@@ -4,7 +4,7 @@ import {BrowserModule} from '@angular/platform-browser';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {UserComponent} from './user/user.component';
+import {SearchJobsComponent} from './user/search-jobs.component';
 import {HttpClientModule} from "@angular/common/http";
 import {HeaderComponent} from './header/header.component';
 import {SignInModalComponent} from './home/signin-modal/sign-in-modal.component';
@@ -16,12 +16,14 @@ import { JobComponent } from './job/job.component';
 import { NewJobModalComponent } from './job/new-job/new-job-modal.component';
 import { FilterJobsPipe } from './pipes/filter-jobs.pipe';
 import { UserJobsComponent } from './user/user-jobs/user-jobs.component';
-import { EditUserComponent } from './user/edit-user/edit-user.component';
+import { UserDetailsComponent } from './user/user-details/user-details.component';
+import { JobDetailsComponent } from './job/job-details/job-details.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
     AppComponent,
-    UserComponent,
+    SearchJobsComponent,
     HeaderComponent,
     SignInModalComponent,
     LogInModalComponent,
@@ -31,13 +33,15 @@ import { EditUserComponent } from './user/edit-user/edit-user.component';
     NewJobModalComponent,
     FilterJobsPipe,
     UserJobsComponent,
-    EditUserComponent
+    UserDetailsComponent,
+    JobDetailsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
