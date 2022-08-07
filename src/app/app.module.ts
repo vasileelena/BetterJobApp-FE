@@ -19,6 +19,7 @@ import { UserJobsComponent } from './user/user-jobs/user-jobs.component';
 import { UserDetailsComponent } from './user/user-details/user-details.component';
 import { JobDetailsComponent } from './job/job-details/job-details.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ApplicantsComponent } from './user/recruiter/applicants/applicants.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     FilterJobsPipe,
     UserJobsComponent,
     UserDetailsComponent,
-    JobDetailsComponent
+    JobDetailsComponent,
+    ApplicantsComponent
   ],
   imports: [
     BrowserModule,

@@ -21,7 +21,7 @@ export class JobComponent implements OnInit {
   @Input() applied: boolean;
 
   isInitialised: boolean = false;
-  applicants: User[] = [];
+  numberOfCandidates: number;
 
   // FontAwesome icons declaration
   readonly iconLocation: IconDefinition = fa.faMapPin;
@@ -32,7 +32,7 @@ export class JobComponent implements OnInit {
               private jobService: JobService) { }
 
   ngOnInit(): void {
-    this.getApplicants();
+    this.getCandidatesNumber();
   }
 
   //TODO handle change of applied and saved states in the screen
@@ -45,12 +45,12 @@ export class JobComponent implements OnInit {
   }
 
   /**
-   * Get the applicants for this job
+   * Get the candidates number for this job
    */
-  getApplicants(): void {
-    this.jobService.getApplicantsForJob(this.model.id).subscribe(
+  getCandidatesNumber(): void {
+    this.jobService.getCandidatesForJob(this.model.id).subscribe(
       (users: User[]) => {
-        this.applicants = users;
+        this.numberOfCandidates = users.length;
         this.isInitialised = true;
       }
     );

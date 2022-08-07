@@ -1,83 +1,83 @@
-<!--<form [formGroup]="form" (ngSubmit)="onSubmit()">-->
-<!--    <div class="form-group">-->
-<!--      <label for="firstName">First name</label><br>-->
-<!--      <input-->
-<!--        id="firstName"-->
-<!--        formControlName="firstName"-->
-<!--        type="text"-->
-<!--        class="form-control">-->
-<!--      <span-->
-<!--        *ngIf="!formControls['firstName'].valid && formControls['firstName'].touched"-->
-<!--        class="text-danger">-->
-<!--          This field is required-->
-<!--          </span>-->
-<!--    </div>-->
-<!--    <div class="form-group">-->
-<!--      <label for="lastName">Last name</label><br>-->
-<!--      <input-->
-<!--        id="lastName"-->
-<!--        type="text"-->
-<!--        formControlName="lastName"-->
-<!--        class="form-control">-->
-<!--      <span-->
-<!--        *ngIf="!formControls['lastName'].valid && formControls['lastName'].touched"-->
-<!--        class="text-danger">-->
-<!--          This field is required-->
-<!--          </span>-->
-<!--    </div>-->
-<!--    <div class="form-group">-->
-<!--      <label for="email">Email</label><br>-->
-<!--      <input-->
-<!--        id="email"-->
-<!--        type="text"-->
-<!--        formControlName="email"-->
-<!--        class="form-control">-->
-<!--    </div>-->
-<!--    <div class="form-group">-->
-<!--      <label for="description">Description</label><br>-->
-<!--      <textarea-->
-<!--        id="description"-->
-<!--        rows="5"-->
-<!--        formControlName="description"-->
-<!--        class="form-control"></textarea>-->
-<!--    </div>-->
-<!--    <div class="form-group">-->
-<!--      <label for="birthDate">Birth date</label><br>-->
-<!--      <input id="birthDate"-->
-<!--             name="birthDate"-->
-<!--             type="date"-->
-<!--             formControlName="birthDate"-->
-<!--             class="form-control">-->
-<!--      <span-->
-<!--        *ngIf="form.hasError('underage', 'birthDate') && formControls['birthDate'].touched"-->
-<!--        class="text-danger">-->
-<!--            You can't register to our website if you are under 16 years old!-->
-<!--          </span>-->
-<!--    </div>-->
-<!--    <div class="form-group">-->
-<!--      <label for="company">Company</label><br>-->
-<!--      <input-->
-<!--        id="company"-->
-<!--        type="text"-->
-<!--        formControlName="company"-->
-<!--        class="form-control">-->
-<!--      <span-->
-<!--        *ngIf="!formControls['company'].valid && formControls['company'].touched"-->
-<!--        class="text-danger">-->
-<!--          This field is required-->
-<!--          </span>-->
-<!--    </div>-->
-<!--  <div>-->
-<!--    <button type="button" class="btn btn-secondary"-->
-<!--    >Close</button>-->
-<!--    <button-->
-<!--      class="btn btn-primary"-->
-<!--      type="submit"-->
-<!--      [disabled]="!form.valid">-->
-<!--      Submit-->
-<!--    </button>-->
-<!--  </div>-->
-<!--</form>-->
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="firstName">First name</label><br>
+      <input
+        id="firstName"
+        formControlName="firstName"
+        type="text"
+        class="form-control">
+      <span
+        *ngIf="!formControls['firstName'].valid && formControls['firstName'].touched"
+        class="text-danger">
+          This field is required
+          </span>
+    </div>
+    <div class="form-group">
+      <label for="lastName">Last name</label><br>
+      <input
+        id="lastName"
+        type="text"
+        formControlName="lastName"
+        class="form-control">
+      <span
+        *ngIf="!formControls['lastName'].valid && formControls['lastName'].touched"
+        class="text-danger">
+          This field is required
+          </span>
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label><br>
+      <input
+        id="email"
+        type="text"
+        formControlName="email"
+        class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="description">Description</label><br>
+      <textarea
+        id="description"
+        rows="5"
+        formControlName="description"
+        class="form-control"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="birthDate">Birth date</label><br>
+      <input id="birthDate"
+             name="birthDate"
+             type="date"
+             formControlName="birthDate"
+             class="form-control">
+      <span
+        *ngIf="form.hasError('underage', 'birthDate') && formControls['birthDate'].touched"
+        class="text-danger">
+            You can't register to our website if you are under 16 years old!
+          </span>
+    </div>
+    <div class="form-group">
+      <label for="company">Company</label><br>
+      <input
+        id="company"
+        type="text"
+        formControlName="company"
+        class="form-control">
+      <span
+        *ngIf="!formControls['company'].valid && formControls['company'].touched"
+        class="text-danger">
+          This field is required
+          </span>
+    </div>
+  <div>
+    <button type="button" class="btn btn-secondary"
+    >Close</button>
+    <button
+      class="btn btn-primary"
+      type="submit"
+      [disabled]="!form.valid">
+      Submit
+    </button>
+  </div>
+</form>
 <h3>Upload cv</h3>
 <div>
   <button (click)="onCvAdded()">Upload</button>

@@ -21,6 +21,7 @@ export class UserDetailsComponent implements OnInit {
   roles: RoleEnum[] = [RoleEnum.USER, RoleEnum.RECRUITER];
   edit: boolean = false;
   currentId: number;
+  currentUserEmail: string;
 
   @ViewChild('fileInput') fileInput: ElementRef;
 
@@ -37,9 +38,9 @@ export class UserDetailsComponent implements OnInit {
   }
 
   private initData() {
-    let userEmail = sessionStorage.getItem('email')!.toString();
+    this.currentUserEmail = sessionStorage.getItem('email')!.toString();
 
-    this.userService.getUserByEmail(userEmail).subscribe(
+    this.userService.getUserByEmail(this.currentUserEmail).subscribe(
       (user: User) => {
         this.currentId = user.id;
         this.form = this.formBuilder.group(
@@ -65,7 +66,7 @@ export class UserDetailsComponent implements OnInit {
   }
 
   onCvAdded(): void {
-    this.userService.uploadCv(this.selectedFile, this.currentId).subscribe(
+    this.userService.uploadCv(this.selectedFile, this.currentUserEmail).subscribe(
       (message: string) => this.fileInput.nativeElement.value = '',
       () => this.fileInput.nativeElement.value = ''
     );

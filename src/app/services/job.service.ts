@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpResponse} from "@angular/common/http";
 import {environment} from "../../environments/environment";
 import {Observable, Subject} from "rxjs";
 import {Job} from "../models/job.model";
 import {User} from "../models/user.model";
+import {FileHelperService} from "./file-helper.service";
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,8 @@ export class JobService {
 
   jobsChanged = new Subject<Job[]>();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+              private fileHelper: FileHelperService) { }
 
   public getJobById(jobId: number): Observable<Job> {
     return this.http.get<Job>(this.userBaseUrl + '/job/' + jobId.toString());
@@ -30,7 +32,13 @@ export class JobService {
     return this.http.post<Job>(this.recruiterBaseUrl + '/add', job);
   }
 
-  public getApplicantsForJob(jobId: number): Observable<User[]> {
+  public getCandidatesForJob(jobId: number): Observable<User[]> {
     return this.http.get<User[]>(this.recruiterBaseUrl + '/jobId/' + jobId + '/applicants');
+  }
+
+  public getCandidateCv(userEmail: string): void {
+    this.fileHelper.downloadFile(this.recruiterBaseUrl + '/' + userEmail)
+      .subscribe((blob: HttpResponse<Blob>) => this.fileHelper.saveFile(blob.body, "CV_" + userEmail)
+        .subscribe());
   }
 }
