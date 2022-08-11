@@ -174,3 +174,8 @@ body{
 .user-dashboard-info-box .candidates-list .thumb {
   margin-right: 20px;
 }
+
+.icon-button {
+  border: none;
+  background-color: white;
+}

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {User} from "../../../models/user.model";
 import {JobService} from "../../../services/job.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {FileHelperService} from "../../../services/file-helper.service";
 import {HttpResponse} from "@angular/common/http";
 
@@ -12,13 +12,14 @@ import {HttpResponse} from "@angular/common/http";
 })
 export class ApplicantsComponent implements OnInit {
 
+
   currentJobId: number;
   candidates: User[] = [];
   isInitialised: boolean = false;
 
   constructor(private jobService: JobService,
               private route: ActivatedRoute,
-              private fileHelper: FileHelperService) { }
+              private router: Router) {}
 
   ngOnInit(): void {
     this.initCandidates();
@@ -37,7 +38,7 @@ export class ApplicantsComponent implements OnInit {
     );
   }
 
-  downloadCvForCandidate(userEmail: string) {
+  downloadCvForCandidate(userEmail: string): void {
     this.jobService.getCandidateCv(userEmail);
   }
 

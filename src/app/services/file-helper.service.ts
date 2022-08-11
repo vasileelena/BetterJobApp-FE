@@ -11,15 +11,16 @@ export class FileHelperService {
 
   downloadFile(route: string): Observable<HttpResponse<Blob>> {
     let headers: HttpHeaders = new HttpHeaders();
-    headers = headers.set('Access-Control-Allow-Origin', '*');
-    headers = headers.set('Access-Control-Allow-Methods', ['GET','HEAD','OPTIONS','POST','PUT']);
-    headers = headers.set('Access-Control-Allow-Headers', ['Origin', 'Content-Type', 'Access-Control-Request-Method', 'Access-Control-Request-Headers']);
+    // headers = headers.set('Access-Control-Allow-Origin', '*');
+    // headers = headers.set('Access-Control-Request-Method', ['POST', 'GET', 'OPTIONS']);
+    // headers = headers.set('Access-Control-Request-Headers', 'Content-Type');
 
     return this.http.get(route
       , {headers: headers,
       responseType: 'blob',
       observe: 'response'}
     );
+
   }
 
   // use: fileHelper.downloadFile.subscribe((blob: HttpResponse<Blob>) => fileHelper.saveFile(blob.body, filename).subscribe());

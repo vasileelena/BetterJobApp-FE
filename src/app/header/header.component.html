@@ -13,8 +13,8 @@
       </li>
       <li class="nav-item">
         <a class="nav-link"
-           routerLinkActive="active"
-           routerLink="/user/profile">
+           style="cursor: pointer"
+           (click)="navigateToProfile()">
           Profile </a>
       </li>
       <li class="nav-item">
@@ -58,11 +58,7 @@
   </div>
 </nav>
 
-<!--data-toggle="modal"-->
-<!--data-target="#modal"-->
+<!--<router-outlet></router-outlet>-->
 
-<!--<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
-  <router-outlet></router-outlet>
-<!--</div>-->
 
 

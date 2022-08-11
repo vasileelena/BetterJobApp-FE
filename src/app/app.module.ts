@@ -16,10 +16,11 @@ import { JobComponent } from './job/job.component';
 import { NewJobModalComponent } from './job/new-job/new-job-modal.component';
 import { FilterJobsPipe } from './pipes/filter-jobs.pipe';
 import { UserJobsComponent } from './user/user-jobs/user-jobs.component';
-import { UserDetailsComponent } from './user/user-details/user-details.component';
+import { EditUserComponent } from './user/user-details/edit-user.component';
 import { JobDetailsComponent } from './job/job-details/job-details.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ApplicantsComponent } from './user/recruiter/applicants/applicants.component';
+import { ProfileComponent } from './user/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -34,9 +35,10 @@ import { ApplicantsComponent } from './user/recruiter/applicants/applicants.comp
     NewJobModalComponent,
     FilterJobsPipe,
     UserJobsComponent,
-    UserDetailsComponent,
+    EditUserComponent,
     JobDetailsComponent,
-    ApplicantsComponent
+    ApplicantsComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +47,7 @@ import { ApplicantsComponent } from './user/recruiter/applicants/applicants.comp
     ReactiveFormsModule,
     FontAwesomeModule
   ],
-  providers: [],
+  providers: [NgbActiveModal],
   bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -1,0 +1,39 @@
+<div class="container db-social" *ngIf="isInitialised">
+  <div class="jumbotron jumbotron-fluid"></div>
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-xl-11">
+        <div class="widget head-profile has-shadow">
+          <div class="widget-body pb-0">
+            <div class="row d-flex align-items-center">
+              <div class="col-xl-4 col-md-4 d-flex justify-content-lg-start justify-content-md-start justify-content-center">
+                <ul>
+                  <li>
+                    <div class="heading">{{model.role.toString().toLowerCase()}}</div>
+                  </li>
+                </ul>
+              </div>
+              <div class="col-xl-4 col-md-4 d-flex justify-content-center">
+                <div class="image-default">
+                  <img class="rounded-circle" src="https://bootdey.com/img/Content/avatar/avatar5.png" alt="...">
+                </div>
+                <div class="infos">
+                  <h2>{{model.firstName}} {{ model.lastName }}</h2>
+                  <div class="location">Las Vegas, Nevada, U.S.</div>
+                </div>
+              </div>
+              <div class="col-xl-4 col-md-4 d-flex justify-content-lg-end justify-content-md-end justify-content-center">
+                <div class="follow">
+                  <button class="btn btn-shadow" (click)="downloadCv()"><i class="la la-user-plus"></i>Download resume</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <p>{{model.description}}</p>
+    </div>
+  </div>
+</div>

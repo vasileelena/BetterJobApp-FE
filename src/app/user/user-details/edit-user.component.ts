@@ -9,10 +9,10 @@ import {switchMap} from "rxjs";
 
 @Component({
   selector: 'app-edit-user',
-  templateUrl: './user-details.component.html',
-  styleUrls: ['./user-details.component.css']
+  templateUrl: './edit-user.component.html',
+  styleUrls: ['./edit-user.component.css']
 })
-export class UserDetailsComponent implements OnInit {
+export class EditUserComponent implements OnInit {
 
   form: FormGroup = new FormGroup({});
   selectedFile: File;

@@ -34,16 +34,23 @@
               </td>
               <td>
                 <ul class="list-unstyled mb-0 d-flex justify-content-end">
-                  <li><a href="#" class="text-primary" data-toggle="tooltip" title="View profile"
-                         data-original-title="view"><i
-                    class="far fa-eye"></i></a></li>
                   <li>
-                    <button class="text-primary"
+                    <button class="text-primary icon-button"
+                            data-toggle="tooltip"
+                            title="View profile"
+                            data-original-title="View profile"
+                            [routerLink]="['/user/profile', candidate.email]"><i
+                      class="far fa-eye"></i>
+                    </button>
+                  </li>
+                  <li>
+                    <button class="text-primary icon-button"
                             data-toggle="tooltip"
                             title="Download CV"
                             data-original-title="Download CV"
                             (click)="downloadCvForCandidate(candidate.email)"><i
-                      class="fas fa-file-download"></i></button>
+                      class="fas fa-file-download"></i>
+                    </button>
                   </li>
                 </ul>
               </td>

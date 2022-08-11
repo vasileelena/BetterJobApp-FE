@@ -37,8 +37,8 @@ export class JobService {
   }
 
   public getCandidateCv(userEmail: string): void {
-    this.fileHelper.downloadFile(this.recruiterBaseUrl + '/' + userEmail)
-      .subscribe((blob: HttpResponse<Blob>) => this.fileHelper.saveFile(blob.body, "CV_" + userEmail)
+    this.fileHelper.downloadFile(this.recruiterBaseUrl + '/applicants/cv/' + userEmail)
+      .subscribe((blob: HttpResponse<Blob>) => this.fileHelper.saveFile(blob.body, "CV_" + userEmail + ".pdf")
         .subscribe());
   }
 }

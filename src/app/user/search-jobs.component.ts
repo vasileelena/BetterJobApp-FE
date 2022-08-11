@@ -65,7 +65,7 @@ export class SearchJobsComponent implements OnInit {
 
   onReset() {
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-      this.router.navigate(['user']);
+      this.router.navigate(['user/search']);
     });
   }
 

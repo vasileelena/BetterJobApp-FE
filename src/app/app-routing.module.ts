@@ -8,16 +8,18 @@ import {AuthGuardService} from "./services/auth-guard.service";
 import {RecruiterAuthGuardService} from "./services/recruiter-auth-guard.service";
 import {RecruiterComponent} from "./user/recruiter/recruiter.component";
 import {UserJobsComponent} from "./user/user-jobs/user-jobs.component";
-import {UserDetailsComponent} from "./user/user-details/user-details.component";
+import {EditUserComponent} from "./user/user-details/edit-user.component";
 import {JobDetailsComponent} from "./job/job-details/job-details.component";
 import {ApplicantsComponent} from "./user/recruiter/applicants/applicants.component";
+import {ProfileComponent} from "./user/profile/profile.component";
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'user/search', component: SearchJobsComponent, canActivate: [AuthGuardService]},
   {path: 'user/search/job-details/:jobId', component: JobDetailsComponent, canActivate: [AuthGuardService]},
   {path: 'user/jobs', component: UserJobsComponent, canActivate: [AuthGuardService]},
-  {path: 'user/profile', component: UserDetailsComponent, canActivate: [AuthGuardService]},
+  {path: 'user/profile/:userEmail', component: ProfileComponent, canActivate: [AuthGuardService]},
+  {path: 'user/profile/edit', component: EditUserComponent, canActivate: [AuthGuardService]},
   {path: 'signin', component: SignInModalComponent},
   {path: 'login', component: LogInModalComponent},
   {path: 'recruiter/job', component: RecruiterComponent, canActivate: [RecruiterAuthGuardService]},

@@ -13,5 +13,6 @@ export interface User {
   company: string;
   birthDate: Date;
   description: string;
-  cv: File;
+  location: string;
+  skills: string;
 }

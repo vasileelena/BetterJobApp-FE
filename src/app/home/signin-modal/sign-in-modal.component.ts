@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {CustomValidators} from "../../custom-validators";
 import {HttpErrorResponse} from "@angular/common/http";
 import {UserService} from "../../services/user.service";
@@ -27,24 +27,6 @@ export class SignInModalComponent implements OnInit {
   ngOnInit(): void {
     this.initForm();
     this.form.valueChanges.subscribe();
-  }
-
-  private initForm() {
-    this.form = this.formBuilder.group(
-      {
-        "firstName": ["", Validators.required],
-        "lastName": ["", Validators.required],
-        "email": [null, [Validators.required, Validators.email]],
-        "password": [null, Validators.compose([Validators.required, Validators.pattern(this.passRegex)])],
-        "confirmPass": [null, Validators.required],
-        "role": [null, Validators.required],
-        "company": [null],
-        "birthDate": [null]
-      },
-      {
-        validator: [CustomValidators.passwordMatchValidator, CustomValidators.birthDateValidator]
-      }
-    )
   }
 
   onSubmit() {
@@ -94,4 +76,36 @@ export class SignInModalComponent implements OnInit {
     // }
   }
 
+
+  onAddSkill(): void {
+    this.skills.push(this.formBuilder.control(''));
+  }
+
+  onDeleteSkill(index: number): void {
+    (<FormArray>this.form.get('skills')).removeAt(index);
+  }
+
+  get skills() {
+    return this.form.get('skills') as FormArray;
+  }
+
+
+  private initForm() {
+    this.form = this.formBuilder.group(
+      {
+        "firstName": ["", Validators.required],
+        "lastName": ["", Validators.required],
+        "email": [null, [Validators.required, Validators.email]],
+        "password": [null, Validators.compose([Validators.required, Validators.pattern(this.passRegex)])],
+        "confirmPass": [null, Validators.required],
+        "role": [null, Validators.required],
+        "company": [null],
+        "location": [null, Validators.required],
+        "birthDate": [null],
+        "skills": this.formBuilder.array([])
+      },
+      {
+        validator: [CustomValidators.passwordMatchValidator, CustomValidators.birthDateValidator]
+      });
+  }
 }

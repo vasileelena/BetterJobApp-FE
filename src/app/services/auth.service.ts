@@ -18,7 +18,7 @@ export class AuthService {
   }
 
   isUserLoggedIn() {
-    if(sessionStorage.getItem('email') === null){
+    if(sessionStorage.getItem('email') === null) {
       return false;
     }
     if(sessionStorage.getItem('email')!.toString() === '')
