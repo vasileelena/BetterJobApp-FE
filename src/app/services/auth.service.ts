@@ -17,7 +17,7 @@ export class AuthService {
     return this.http.post<User>(environment.apiBaseUrl + '/login', userInputs);
   }
 
-  isUserLoggedIn() {
+  isUserLoggedIn(): boolean {
     if(sessionStorage.getItem('email') === null) {
       return false;
     }
@@ -28,7 +28,7 @@ export class AuthService {
 
   }
 
-  isUserRecruiter() {
+  isUserRecruiter(): boolean {
     if(this.isUserLoggedIn()) {
       if(sessionStorage.getItem('role') === 'RECRUITER'){
         return true;
@@ -38,7 +38,7 @@ export class AuthService {
     return false;
   }
 
-  logOut() {
+  logOut(): void {
     sessionStorage.setItem('email', '');
     sessionStorage.setItem('role', '');
     this.router.navigate(['/']);

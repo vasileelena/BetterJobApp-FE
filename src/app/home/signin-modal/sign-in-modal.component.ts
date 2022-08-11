@@ -55,38 +55,24 @@ export class SignInModalComponent implements OnInit {
     return this.form.controls;
   }
 
-  public checkIfValid() {
-    // const role = this.form.get('role')?.value;
-    // if(role === RoleEnum.USER ) {
-    //   this.form.get('company')?.setValue(null);
-    //   this.form.get('company')?.clearValidators();
-    //   // this.form.get('company')?.updateValueAndValidity({onlySelf: true});
-    //
-    //   this.form.get('birthDate')?.addValidators(Validators.required);
-    //   // this.form.get('birthDate')?.updateValueAndValidity({onlySelf: true});
-    // }
-    // else if(role === RoleEnum.RECRUITER ){
-    //   this.form.get('birthDate')?.setValue(null);
-    //   this.form.get('birthDate')?.clearValidators();
-    //   // this.form.get('birthDate')?.updateValueAndValidity({onlySelf: true});
-    //
-    //   this.form.get('company')?.addValidators(Validators.required);
-    //   // this.form.get('company')?.updateValueAndValidity({onlySelf: true});
-    //
-    // }
-  }
+  /**
+   * Updated the controls validators depending on the type of user
+   */
+  public updateValidationForUserType(): void {
+    if(this.formControls['role'].value === RoleEnum.USER) {
+      this.formControls['birthDate'].clearValidators();
+      this.formControls['birthDate'].setValue(null);
 
+      this.formControls['company'].addValidators(Validators.required);
+      this.formControls['company'].updateValueAndValidity({onlySelf: true});
+    }
+    else {
+      this.formControls['company'].clearValidators();
+      this.formControls['company'].setValue(null);
 
-  onAddSkill(): void {
-    this.skills.push(this.formBuilder.control(''));
-  }
-
-  onDeleteSkill(index: number): void {
-    (<FormArray>this.form.get('skills')).removeAt(index);
-  }
-
-  get skills() {
-    return this.form.get('skills') as FormArray;
+      this.formControls['birthDate'].addValidators(Validators.required);
+      this.formControls['birthDate'].updateValueAndValidity({onlySelf: true});
+    }
   }
 
 
@@ -100,10 +86,7 @@ export class SignInModalComponent implements OnInit {
         "confirmPass": [null, Validators.required],
         "role": [null, Validators.required],
         "company": [null],
-        "location": [null, Validators.required],
-        "birthDate": [null],
-        "skills": this.formBuilder.array([])
-      },
+        "birthDate": [null]},
       {
         validator: [CustomValidators.passwordMatchValidator, CustomValidators.birthDateValidator]
       });

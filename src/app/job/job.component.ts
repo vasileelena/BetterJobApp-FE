@@ -5,6 +5,8 @@ import {JobService} from "../services/job.service";
 import {User} from "../models/user.model";
 import * as fa from '@fortawesome/free-solid-svg-icons'
 import {IconDefinition} from "@fortawesome/free-brands-svg-icons";
+import {finalize, Observable, switchMap} from "rxjs";
+import {map} from "rxjs/operators";
 
 
 @Component({
@@ -22,6 +24,7 @@ export class JobComponent implements OnInit {
 
   isInitialised: boolean = false;
   numberOfCandidates: number;
+  company: string;
 
   // FontAwesome icons declaration
   readonly iconLocation: IconDefinition = fa.faMapPin;
@@ -29,7 +32,8 @@ export class JobComponent implements OnInit {
   readonly iconExperience: IconDefinition = fa.faAward;
 
   constructor(private userService: UserService,
-              private jobService: JobService) { }
+              private jobService: JobService) {
+  }
 
   ngOnInit(): void {
     this.getCandidatesNumber();
@@ -48,12 +52,22 @@ export class JobComponent implements OnInit {
    * Get the candidates number for this job
    */
   getCandidatesNumber(): void {
-    this.jobService.getCandidatesForJob(this.model.id).subscribe(
-      (users: User[]) => {
-        this.numberOfCandidates = users.length;
-        this.isInitialised = true;
-      }
-    );
+    this.jobService.getCandidatesForJob(this.model.id)
+      .pipe(
+        finalize(() => this.isInitialised = true),
+        switchMap(
+          (users: User[]) => {
+            this.numberOfCandidates = users.length;
+            return this.initCompany();
+          }))
+      .subscribe((recruiter: User) => this.company = recruiter.company);
+  }
+
+  /**
+   * Initialize the company that hosts the job
+   */
+  initCompany(): Observable<User> {
+    return this.userService.getUserById(this.model.recruiterId);
   }
 
 }

@@ -23,8 +23,8 @@ export class UserService{
     return this.http.post<User>( environment.apiBaseUrl + '/signin', user);
   }
 
-  public updateUser(user: User): Observable<void> {
-    return this.http.put<void>(this.url + '/update', user);
+  public updateUser(user: User): Observable<User> {
+    return this.http.put<User>(this.url + '/update', user);
   }
 
   public deleteUser(id: number): Observable<void> {
@@ -32,7 +32,11 @@ export class UserService{
   }
 
   public getUserByEmail(email: string): Observable<User> {
-    return this.http.get<User>(this.url + '/email/' + email.toString());
+    return this.http.get<User>(this.url + '/email/' + email);
+  }
+
+  public getUserById(id: number): Observable<User> {
+    return this.http.get<User>(this.url + '/id/' + id.toString());
   }
 
   public getAllJobs(): Observable<Job[]> {

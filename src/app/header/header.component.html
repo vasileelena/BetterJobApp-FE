@@ -48,11 +48,19 @@
         Log in
       </button>
       <button
+        *ngIf="!isUserLoggedIn()"
         class="btn btn-light header-button"
         (click)="openSigninModal()"
         routerLinkActive="active"
         routerLink="/signin">
         Sign in
+      </button>
+      <button
+        *ngIf="isUserLoggedIn()"
+        class="btn btn-light header-button"
+        routerLinkActive="active"
+        routerLink="/user/profile/edit">
+        Edit profile
       </button>
     </div>
   </div>

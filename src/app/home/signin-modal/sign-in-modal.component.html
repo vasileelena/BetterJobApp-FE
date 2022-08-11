@@ -104,7 +104,7 @@
               [value]="roles[0]"
               formControlName="role"
               class="radio"
-              (click)="checkIfValid()">
+              (click)="updateValidationForUserType()">
             User
           </label>
           <label>
@@ -114,7 +114,7 @@
               [value]="roles[1]"
               formControlName="role"
               class="radio"
-              (click)="checkIfValid()">
+              (click)="updateValidationForUserType()">
             Recruiter
           </label>
         </div>
@@ -130,46 +130,6 @@
             class="text-danger">
             You can't register to our website if you are under 16 years old!
           </span>
-        </div>
-        <div *ngIf="formControls['role'].value === roles[0]" class="form-group">
-          <label for="location">Location</label><br>
-          <input id="location"
-                 name="location"
-                 type="text"
-                 formControlName="location"
-                 class="form-control">
-          <span
-            *ngIf="!formControls['location'].valid && formControls['location'].touched"
-            class="text-danger">
-          This field is required
-          </span>
-        </div>
-        <div *ngIf="formControls['role'].value === roles[0]">
-          <label for="skills">Skills</label><br>
-          <div class="form-group" formArrayName="skills" id="skills">
-            <div class="row" *ngFor="let skill of skills.controls; let i = index">
-              <div class="col-xs-12">
-                <input
-                  type="text"
-                  class="form-control"
-                  [formControlName]="i">
-                <button
-                  type="button"
-                  class="btn btn-danger"
-                  (click)="onDeleteSkill(i)"> X
-                </button>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-xs-12">
-              <button
-                class="btn btn-success"
-                type="button"
-                (click)="onAddSkill()">Add skill
-              </button>
-            </div>
-          </div>
         </div>
         <div *ngIf="formControls['role'].value === roles[1]" class="form-group">
           <label for="company">Company</label><br>

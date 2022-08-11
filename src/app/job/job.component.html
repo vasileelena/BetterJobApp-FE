@@ -4,7 +4,7 @@
       <div class="row flex-fill">
         <div class="col-sm-5">
           <h4 class="h4">{{ this.model.jobTitle}}</h4>
-          <p>Company</p>
+          <p>{{company}}</p>
           <div class="d-flex gap-1 align-items-center">
             <fa-icon class="job-card-icon" [icon]="iconLocation"></fa-icon>
             <p class="job-card-tag">{{this.model.location.toString().split('_').join(' ')}}</p>

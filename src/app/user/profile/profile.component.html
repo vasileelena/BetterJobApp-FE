@@ -19,11 +19,11 @@
                 </div>
                 <div class="infos">
                   <h2>{{model.firstName}} {{ model.lastName }}</h2>
-                  <div class="location">Las Vegas, Nevada, U.S.</div>
+                  <div class="location">{{model.location}}</div>
                 </div>
               </div>
               <div class="col-xl-4 col-md-4 d-flex justify-content-lg-end justify-content-md-end justify-content-center">
-                <div class="follow">
+                <div class="follow" *ngIf="model.role.toString() === 'USER'">
                   <button class="btn btn-shadow" (click)="downloadCv()"><i class="la la-user-plus"></i>Download resume</button>
                 </div>
               </div>
@@ -32,8 +32,19 @@
         </div>
       </div>
     </div>
-    <div>
+    <div *ngIf="model.role.toString() !== 'USER'">
+      <h5>Company</h5>
+      <p>{{model.company}}</p>
+    </div>
+    <div *ngIf="model.role.toString() === 'USER'">
+      <h5>Description</h5>
       <p>{{model.description}}</p>
+    </div>
+    <div *ngIf="model.role.toString() === 'USER'">
+      <h5>Skills</h5>
+      <div class="d-flex gap-3">
+          <p *ngFor="let skill of model.skills.split(',')">{{skill}}</p>
+      </div>
     </div>
   </div>
 </div>
