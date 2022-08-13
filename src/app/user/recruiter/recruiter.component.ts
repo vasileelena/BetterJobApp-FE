@@ -46,7 +46,7 @@ export class RecruiterComponent implements OnInit, OnDestroy {
   }
 
   onAddJob(): void {
-    const modalOptions: NgbModalOptions = {backdrop: 'static', size: 'md'};
+    const modalOptions: NgbModalOptions = {backdrop: 'static', size: 'lg'};
     const modalInstance = this.modalService.open(NewJobModalComponent, modalOptions);
     modalInstance.componentInstance.recruiterId = this.currentUserId;
   }
@@ -63,7 +63,7 @@ export class RecruiterComponent implements OnInit, OnDestroy {
       .subscribe(
           (jobs: Job[]) => {
             this.jobList = jobs
-            if(this.router.url.toString().split('/').length === 4) {
+            if(this.router.url.toString().split('/')[3] === 'new') {
               this.onAddJob();
             }
           });

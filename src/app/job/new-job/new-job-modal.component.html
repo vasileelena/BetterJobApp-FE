@@ -1,4 +1,4 @@
-<div class="modal-dialog" role="document" #modal>
+<div class="" role="document" #modal>
   <div class="modal-content">
     <div class="modal-header">
       <h5 class="modal-title" id="newJobModal">Post a new job listing</h5>
@@ -95,7 +95,7 @@
             This field is required
           </span>
           </div>
-          <div class="form-group col-md-4" >
+          <div class="form-group col-md-4">
             <label for="program">Program</label><br>
             <select
               id="program"
@@ -142,8 +142,8 @@
               id="currency"
               formControlName="currency"
               class="custom-select">
-              <option value="0"> Ron </option>
-              <option value="1"> Euro </option>
+              <option value="0"> Ron</option>
+              <option value="1"> Euro</option>
             </select>
           </div>
         </div>
@@ -153,9 +153,56 @@
             id="description"
             rows="5"
             formControlName="description"
-            class="form-control"></textarea>
+            class="form-control"
+            maxlength="250"
+            [placeholder]="descriptionPlaceholder"></textarea>
           <span
             *ngIf="!formControls['description'].valid && formControls['description'].touched"
+            class="text-danger">
+            This field is required
+          </span>
+        </div>
+        <div class="form-group">
+          <label for="requirements">Requirements</label><br>
+          <textarea
+            id="requirements"
+            rows="5"
+            formControlName="requirements"
+            class="form-control"
+            maxlength="250"
+            [placeholder]="requirementsPlaceholder"></textarea>
+          <span
+            *ngIf="!formControls['requirements'].valid && formControls['requirements'].touched"
+            class="text-danger">
+            This field is required
+          </span>
+        </div>
+        <div class="form-group">
+          <label for="responsibilities">Responsibilities</label><br>
+          <textarea
+            id="responsibilities"
+            rows="5"
+            formControlName="responsibilities"
+            class="form-control"
+            maxlength="250"
+            [placeholder]="responsibilitiesPlaceholder"></textarea>
+          <span
+            *ngIf="!formControls['responsibilities'].valid && formControls['responsibilities'].touched"
+            class="text-danger">
+            This field is required
+          </span>
+        </div>
+        <div class="form-group">
+          <label for="benefits">Benefits</label><br>
+          <textarea
+            id="benefits"
+            rows="5"
+            formControlName="benefits"
+            class="form-control"
+            maxlength="250"
+            [placeholder]="benefitsPlaceholder"></textarea>
+          <span
+            *ngIf="!formControls['benefits'].valid && formControls['benefits'].touched"
             class="text-danger">
             This field is required
           </span>
@@ -163,7 +210,8 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="closeModal()"
-        >Close</button>
+        >Close
+        </button>
         <button
           class="btn btn-primary"
           type="submit"

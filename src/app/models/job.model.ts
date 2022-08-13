@@ -73,5 +73,8 @@ export interface Job {
   currency: CurrencyEnum;
   location: LocationEnum;
   description: string;
+  requirements: string;
+  responsibilities: string;
+  benefits: string;
   creationDate: Date;
 }

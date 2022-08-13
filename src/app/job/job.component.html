@@ -3,7 +3,10 @@
     <div class="card-body">
       <div class="row flex-fill">
         <div class="col-sm-5">
+          <small class="faded-text">Posted on {{creationDate}}</small>
+          <a [routerLink]="['/user/search/job-details', model.id]">
           <h4 class="h4">{{ this.model.jobTitle}}</h4>
+          </a>
           <p>{{company}}</p>
           <div class="d-flex gap-1 align-items-center">
             <fa-icon class="job-card-icon" [icon]="iconLocation"></fa-icon>
@@ -25,6 +28,9 @@
           <button class="btn btn-primary job-button">Close job opening</button>
           <button class="btn btn-primary job-button" [routerLink]="['applicants', model.id]">See applicants</button>
           <p> {{numberOfCandidates}} candidates </p>
+        </div>
+        <div *ngIf="!recruiter && recommended" class="col-sm-2 text-lg-end ms-auto">
+          <p class=""> {{recommendationLabel}}</p>
         </div>
         <div *ngIf="!recruiter && !applied" class="col-sm-2 text-lg-end job-button ms-auto">
           <button class="btn btn-primary stretched-link" (click)="applyToJob()">Apply</button>

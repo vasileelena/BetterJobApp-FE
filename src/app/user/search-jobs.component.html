@@ -1,5 +1,46 @@
 <router-outlet></router-outlet>
-<div class="container">
+<div *ngIf="!choseSearchMethod" class="container vh-100">
+  <div class="d-flex flex-column gap-3 justify-content-center align-items-center h-75">
+    <h3 class="search-title">Your new career is waiting for you!</h3>
+    <input
+      id="keyword-input"
+      name="keyword-input"
+      #keywordInput1
+      class="keyword-input1"
+      type="text">
+    <div class="d-flex gap-1">
+      <button
+        class="btn btn-lg btn-outline-dark"
+        (click)="onSearchAfterKeywords(keywordInput1.value)"
+      >Search after keyword
+      </button>
+      <button
+        class="btn btn-lg btn-outline-dark"
+        (click)="onSearchAllJobs()"
+      >See all jobs
+      </button>
+    </div>
+  </div>
+</div>
+<div *ngIf="choseSearchMethod" class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="container">
+        <input
+          name="keyword-input"
+          #keywordInput2
+          class="keyword-input2"
+          type="text"
+          placeholder="Search keywords"
+          [value]="keywords">
+        <button
+          class="btn btn-primary search-button"
+          (click)="filterJobsAfterKeywordsAndDate(keywordInput2.value)">
+          <i class="fas fa-search"></i>
+        </button>
+      </div>
+    </div>
+  </div>
   <div class="row">
     <div class="col-3">
       <form [formGroup]="filterForm" (ngSubmit)="onSubmit()" class="d-flex flex-column gap-3 m-3">
@@ -115,9 +156,9 @@
                     id="currency"
                     formControlName="currency"
                     class="custom-select">
-                    <option value="0"> Ron </option>
-                    <option value="1"> Euro </option>
-                    <option value="2"> All </option>
+                    <option value="0"> Ron</option>
+                    <option value="1"> Euro</option>
+                    <option value="2"> All</option>
                   </select>
                 </div>
               </div>
@@ -125,7 +166,8 @@
           </div>
           <div class="d-flex gap-1 mt-2">
             <button type="button" class="btn btn-danger" (click)="onReset()"
-            >Reset filters</button>
+            >Reset filters
+            </button>
             <button
               class="btn btn-primary"
               type="submit">

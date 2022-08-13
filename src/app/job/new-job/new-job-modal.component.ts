@@ -9,11 +9,16 @@ import {Subject} from "rxjs";
 import {map} from "rxjs/operators";
 
 @Component({
-  selector: 'app-edit-job',
+  selector: 'app-add-job',
   templateUrl: './new-job-modal.component.html',
   styleUrls: ['./new-job-modal.component.css']
 })
 export class NewJobModalComponent implements OnInit {
+
+  readonly descriptionPlaceholder: string = 'A brief description of the job position';
+  readonly requirementsPlaceholder: string = 'Describe the ideal candidate';
+  readonly responsibilitiesPlaceholder: string = 'Present some of the responsibilities for this job position';
+  readonly benefitsPlaceholder: string = 'Enumerate some of the benefits offered by your company';
 
   form: FormGroup = new FormGroup({});
   industryArray: string[] = [];
@@ -23,7 +28,6 @@ export class NewJobModalComponent implements OnInit {
 
   @Input()
   private recruiterId: number;
-
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -42,7 +46,8 @@ export class NewJobModalComponent implements OnInit {
   onSubmit() : void{
     this.jobService.addJob({
       recruiterId: this.recruiterId,
-      ...this.form.value
+      ...this.form.value,
+      creationDate: new Date(Date.now())
     }).subscribe(() => this.closeModal());
   }
 
@@ -79,7 +84,10 @@ export class NewJobModalComponent implements OnInit {
         "salaryUpperRange": [null, Validators.required],
         "currency": [CurrencyEnum.RON, Validators.required],
         "location": [null, Validators.required],
-        "description": [null, Validators.required]
+        "description": [null, Validators.required],
+        "requirements": [null, Validators.required],
+        "responsibilities": [null, Validators.required],
+        "benefits": [null, Validators.required],
       }
     );
   }

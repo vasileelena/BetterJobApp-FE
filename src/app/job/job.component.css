@@ -77,3 +77,8 @@ body{
   margin-left: 2px;
 }
 
+.faded-text {
+  color: grey;
+  opacity: 80%;
+}
+

@@ -46,5 +46,11 @@
           <p *ngFor="let skill of model.skills.split(',')">{{skill}}</p>
       </div>
     </div>
+    <div *ngIf="model.role.toString() !== 'USER'">
+      <h5>Posted jobs</h5>
+      <div class="container" *ngFor="let job of jobList">
+        <app-job [model]="job" [recruiter]="isCurrentUserRecruiter()"></app-job>
+      </div>
+    </div>
   </div>
 </div>

@@ -25,18 +25,26 @@ export class JobComponent implements OnInit {
   isInitialised: boolean = false;
   numberOfCandidates: number;
   company: string;
+  recommended: boolean;
+  creationDate: string;
 
   // FontAwesome icons declaration
   readonly iconLocation: IconDefinition = fa.faMapPin;
   readonly iconSalary: IconDefinition = fa.faEuroSign;
   readonly iconExperience: IconDefinition = fa.faAward;
 
+  readonly recommendationLabel: string = 'This job could fit your profile'
+
   constructor(private userService: UserService,
               private jobService: JobService) {
   }
 
   ngOnInit(): void {
+    this.creationDate = new Date(this.model.creationDate).toLocaleDateString();
     this.getCandidatesNumber();
+    if(!this.recruiter) {
+      this.isJobRecommendedForUser();
+    }
   }
 
   //TODO handle change of applied and saved states in the screen
@@ -68,6 +76,25 @@ export class JobComponent implements OnInit {
    */
   initCompany(): Observable<User> {
     return this.userService.getUserById(this.model.recruiterId);
+  }
+
+  /**
+   * Check if the job is fitted for a user's profile by the user's skills
+   * and the job's description and requirements
+   */
+  isJobRecommendedForUser() {
+    this.isInitialised = false;
+    this.userService.getUserById(this.userId).subscribe(
+      (user: User) => {
+        const skillsArray = user.skills.split(',');
+
+        this.recommended = (skillsArray.some(skill => {
+          return this.model.description.toLowerCase().includes(skill.toLowerCase()) ||
+            this.model.requirements.toLowerCase().includes(skill.toLowerCase());
+        }));
+
+        this.isInitialised = true;
+      });
   }
 
 }

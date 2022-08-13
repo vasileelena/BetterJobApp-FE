@@ -16,6 +16,7 @@ import {ProfileComponent} from "./user/profile/profile.component";
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'user/search', component: SearchJobsComponent, canActivate: [AuthGuardService]},
+  {path: 'user/search/keywords', component: SearchJobsComponent, canActivate: [AuthGuardService]},
   {path: 'user/search/job-details/:jobId', component: JobDetailsComponent, canActivate: [AuthGuardService]},
   {path: 'user/jobs', component: UserJobsComponent, canActivate: [AuthGuardService]},
   {path: 'user/profile/edit', component: EditUserComponent, canActivate: [AuthGuardService]},
