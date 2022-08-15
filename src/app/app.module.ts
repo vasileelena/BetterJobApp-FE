@@ -21,6 +21,7 @@ import { JobDetailsComponent } from './job/job-details/job-details.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ApplicantsComponent } from './user/recruiter/applicants/applicants.component';
 import { ProfileComponent } from './user/profile/profile.component';
+import { GenericModalComponent } from './generic-modal/generic-modal.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { ProfileComponent } from './user/profile/profile.component';
     EditUserComponent,
     JobDetailsComponent,
     ApplicantsComponent,
-    ProfileComponent
+    ProfileComponent,
+    GenericModalComponent
   ],
   imports: [
     BrowserModule,

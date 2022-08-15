@@ -16,6 +16,8 @@ export class JobService {
 
 
   jobsChanged = new Subject<Job[]>();
+  savedJobsChanged = new Subject<Job[]>();
+  appliedJobsChanged = new Subject<Job[]>();
 
   constructor(private http: HttpClient,
               private fileHelper: FileHelperService) { }

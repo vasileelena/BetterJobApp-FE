@@ -43,9 +43,8 @@ export class UserService{
     return this.http.get<Job[]>(this.url + '/job/all');
   }
 
-  public addJobToUser(userId: number, jobId: number, apply: boolean): Observable<UserJob> {
-    console.log(userId, jobId, apply);
-    return this.http.post<UserJob>(this.url + '/job/addJobToUser',
+  public addJobToUser(userId: number, jobId: number, apply: boolean): Observable<Job[]> {
+    return this.http.post<Job[]>(this.url + '/job/addJobToUser',
       {
         'userId': userId,
         'jobId': jobId,
@@ -59,6 +58,16 @@ export class UserService{
 
   public getAppliedJobs(userId: number): Observable<Job[]> {
     return this.http.get<Job[]>(this.url + '/jobs/applied/' + userId.toString());
+  }
+
+  public hasUserAppliedToJob(userId: number, jobId: number): Observable<boolean> {
+    return this.http
+      .get<boolean>(this.url + '/job/applied/userId/' + userId.toString() + '/jobId/' + jobId.toString());
+  }
+
+  public hasUserSavedJob(userId: number, jobId: number): Observable<boolean> {
+    return this.http
+      .get<boolean>(this.url + '/job/saved/userId/' + userId.toString() + '/jobId/' + jobId.toString());
   }
 
   public uploadCv(file: File, userEmail: string): Observable<string> {

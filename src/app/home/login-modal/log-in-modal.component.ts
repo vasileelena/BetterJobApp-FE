@@ -1,9 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {UserService} from "../../services/user.service";
 import {Router} from "@angular/router";
-import {map} from "rxjs"
-import {User} from "../../models/user.model";
+import {RoleEnum, User} from "../../models/user.model";
 import {AuthService} from "../../services/auth.service";
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 
@@ -33,8 +31,6 @@ export class LogInModalComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.form.value);
-
     let result = this.authService.login(this.form.value)
       .subscribe(
         (user: User) => {
@@ -47,7 +43,14 @@ export class LogInModalComponent implements OnInit {
             'role',
             user.role.toString()
           );
-          this.onCancel();
+          if(user.role.toString() === 'USER') {
+            this.router.navigate(['user/search/keywords'])
+              .then(() => this.modalService.close());
+          }
+          else {
+            this.router.navigate(['recruiter/job'])
+              .then(() => this.modalService.close());
+          }
         }
       }, error => {
         alert(error.message());
@@ -57,10 +60,7 @@ export class LogInModalComponent implements OnInit {
 
   onCancel() {
     this.form.reset();
-    this.router.navigate(['/user/search']).then(
-      () => this.modalService.dismiss()
-    );
-
+    this.modalService.dismiss('cancel');
   }
 
   get formControls() {

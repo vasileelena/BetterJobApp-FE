@@ -154,7 +154,7 @@
             rows="5"
             formControlName="description"
             class="form-control"
-            maxlength="250"
+            maxlength="1000"
             [placeholder]="descriptionPlaceholder"></textarea>
           <span
             *ngIf="!formControls['description'].valid && formControls['description'].touched"
@@ -169,7 +169,7 @@
             rows="5"
             formControlName="requirements"
             class="form-control"
-            maxlength="250"
+            maxlength="2000"
             [placeholder]="requirementsPlaceholder"></textarea>
           <span
             *ngIf="!formControls['requirements'].valid && formControls['requirements'].touched"
@@ -184,7 +184,7 @@
             rows="5"
             formControlName="responsibilities"
             class="form-control"
-            maxlength="250"
+            maxlength="2000"
             [placeholder]="responsibilitiesPlaceholder"></textarea>
           <span
             *ngIf="!formControls['responsibilities'].valid && formControls['responsibilities'].touched"
@@ -199,7 +199,7 @@
             rows="5"
             formControlName="benefits"
             class="form-control"
-            maxlength="250"
+            maxlength="2000"
             [placeholder]="benefitsPlaceholder"></textarea>
           <span
             *ngIf="!formControls['benefits'].valid && formControls['benefits'].touched"

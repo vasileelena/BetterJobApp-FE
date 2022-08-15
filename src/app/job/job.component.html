@@ -27,10 +27,10 @@
         <div *ngIf="recruiter" class="col-sm-2 text-lg-end ms-auto">
           <button class="btn btn-primary job-button">Close job opening</button>
           <button class="btn btn-primary job-button" [routerLink]="['applicants', model.id]">See applicants</button>
-          <p> {{numberOfCandidates}} candidates </p>
+          <p> {{numberOfCandidates}} candidates</p>
         </div>
         <div *ngIf="!recruiter && recommended" class="col-sm-2 text-lg-end ms-auto">
-          <p class=""> {{recommendationLabel}}</p>
+          <p class="">{{recommendationLabel}}</p>
         </div>
         <div *ngIf="!recruiter && !applied" class="col-sm-2 text-lg-end job-button ms-auto">
           <button class="btn btn-primary stretched-link" (click)="applyToJob()">Apply</button>

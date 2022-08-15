@@ -1,18 +1,19 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {User} from "../models/user.model";
 import {UserService} from "../services/user.service";
 import {Router} from "@angular/router";
 import {ExperienceEnum, IndustryEnum, Job, LocationEnum, ProgramEnum} from "../models/job.model";
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {JobFilterInputs} from "../models/job-filter-inputs.model";
-import {finalize, switchMap} from "rxjs";
+import {finalize, Subscription, switchMap} from "rxjs";
+import {JobService} from "../services/job.service";
 
 @Component({
   selector: 'app-user',
   templateUrl: './search-jobs.component.html',
   styleUrls: ['./search-jobs.component.css']
 })
-export class SearchJobsComponent implements OnInit {
+export class SearchJobsComponent implements OnInit, OnDestroy {
   isInitialised: boolean = false;
   choseSearchMethod: boolean;
   currentUserId: any;
@@ -32,22 +33,26 @@ export class SearchJobsComponent implements OnInit {
   filterInputs!: JobFilterInputs;
   filterApplied = false;
 
-  // @ViewChild('locCheckbox') locationCheckbox: any;
+  savedJobsChangedSubscription: Subscription;
+  appliedJobsChangedSubscription: Subscription;
 
   constructor(private userService: UserService,
+              private jobService: JobService,
               private router: Router,
               private formBuilder: FormBuilder) {
   }
 
   ngOnInit(): void {
-    if (sessionStorage.getItem('role') === 'RECRUITER') {
-      this.router.navigate(['recruiter/job']);
-    } else {
-      this.choseSearchMethod = this.router.url.toString().split('/').length !== 4;
-      this.getAllJobs();
-      this.initEnums();
-      this.initForm();
-    }
+    this.choseSearchMethod = this.router.url.toString().split('/').length !== 4;
+    this.getAllJobs();
+    this.initEnums();
+    this.initForm();
+    this.initJobsSubscriptions();
+  }
+
+  ngOnDestroy(): void {
+    this.savedJobsChangedSubscription.unsubscribe();
+    this.appliedJobsChangedSubscription.unsubscribe();
   }
 
   get formControls() {
@@ -131,8 +136,10 @@ export class SearchJobsComponent implements OnInit {
       .pipe(
         finalize(() => this.isInitialised = true))
       .subscribe((jobs: Job[]) => {
-          this.allJobs = jobs.sort(
-            (a: Job, b: Job) => Number(new Date(b.creationDate)) - Number(new Date(a.creationDate)));
+          this.allJobs = jobs
+            .filter(j => !this.appliedJobs.includes(j))
+            .sort(
+              (a: Job, b: Job) => Number(new Date(b.creationDate)) - Number(new Date(a.creationDate)));
           this.displayedJobs = this.allJobs;
         }
       );
@@ -153,11 +160,28 @@ export class SearchJobsComponent implements OnInit {
       });
   }
 
+  private initJobsSubscriptions() {
+    this.savedJobsChangedSubscription = this.jobService.savedJobsChanged
+      .subscribe(
+        (savedJobs: Job[]) => {
+          this.isInitialised = false;
+          this.savedJobs = savedJobs;
+          this.isInitialised = true;
+        });
+    this.appliedJobsChangedSubscription = this.jobService.appliedJobsChanged
+      .subscribe(
+        (appliedJobs: Job[]) => {
+          this.isInitialised = false;
+          this.appliedJobs = appliedJobs;
+          this.isInitialised = true;
+        });
+
+  }
+
   private initEnums() {
     this.industryArray = Object.keys(IndustryEnum).filter((key: any) => !isNaN(Number(IndustryEnum[key])));
     this.experienceArray = Object.keys(ExperienceEnum).filter((key: any) => !isNaN(Number(ExperienceEnum[key])));
     this.programArray = Object.keys(ProgramEnum).filter((key: any) => !isNaN(Number(ProgramEnum[key])));
     this.locationArray = Object.keys(LocationEnum).filter((key: any) => !isNaN(Number(LocationEnum[key])));
   }
-
 }
