@@ -8,7 +8,7 @@ import {AuthGuardService} from "./services/auth-guard.service";
 import {RecruiterAuthGuardService} from "./services/recruiter-auth-guard.service";
 import {RecruiterComponent} from "./user/recruiter/recruiter.component";
 import {UserJobsComponent} from "./user/user-jobs/user-jobs.component";
-import {EditUserComponent} from "./user/user-details/edit-user.component";
+import {EditUserComponent} from "./user/edit-user/edit-user.component";
 import {JobDetailsComponent} from "./job/job-details/job-details.component";
 import {ApplicantsComponent} from "./user/recruiter/applicants/applicants.component";
 import {ProfileComponent} from "./user/profile/profile.component";

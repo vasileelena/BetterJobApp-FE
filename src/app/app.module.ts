@@ -16,7 +16,7 @@ import { JobComponent } from './job/job.component';
 import { NewJobModalComponent } from './job/new-job/new-job-modal.component';
 import { FilterJobsPipe } from './pipes/filter-jobs.pipe';
 import { UserJobsComponent } from './user/user-jobs/user-jobs.component';
-import { EditUserComponent } from './user/user-details/edit-user.component';
+import { EditUserComponent } from './user/edit-user/edit-user.component';
 import { JobDetailsComponent } from './job/job-details/job-details.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ApplicantsComponent } from './user/recruiter/applicants/applicants.component';

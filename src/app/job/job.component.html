@@ -1,4 +1,3 @@
-<!--<a [routerLink]="['/user/search/job-details', model.id]" class="job-card-button">-->
   <div class="card mb-4" *ngIf="isInitialised">
     <div class="card-body">
       <div class="row flex-fill">
@@ -24,21 +23,23 @@
           </div>
         </div>
 
-        <div *ngIf="recruiter" class="col-sm-2 text-lg-end ms-auto">
-          <button class="btn btn-primary job-button">Close job opening</button>
-          <button class="btn btn-primary job-button" [routerLink]="['applicants', model.id]">See applicants</button>
-          <p> {{numberOfCandidates}} candidates</p>
+        <div *ngIf="recruiter" class="col-sm-2 text-lg-end ml-auto d-flex flex-column gap-1 ">
+          <button class="btn gradient-button job-button" (click)="onDeleteJob()">Close job opening</button>
+          <a [routerLink]="['applicants', model.id]"> {{numberOfCandidates}} candidates</a>
         </div>
-        <div *ngIf="!recruiter && recommended" class="col-sm-2 text-lg-end ms-auto">
-          <p class="">{{recommendationLabel}}</p>
-        </div>
-        <div *ngIf="!recruiter && !applied" class="col-sm-2 text-lg-end job-button ms-auto">
-          <button class="btn btn-primary stretched-link" (click)="applyToJob()">Apply</button>
-        </div>
-        <div *ngIf="!recruiter && !saved" class="col-sm-2 text-lg-end job-button ms-auto">
-          <button class="btn btn-primary stretched-link" (click)="saveJob()">Save</button>
+        <div *ngIf="!recruiter" class="col-sm-2 text-lg-end ml-auto d-flex flex-column gap-2">
+          <div  class="d-flex flex-row gap-1">
+            <div *ngIf="!applied">
+              <button class="btn gradient-button job-button stretched-link" (click)="applyToJob()">Apply</button>
+            </div>
+            <div *ngIf="!saved">
+              <button class="btn gradient-button job-button stretched-link" (click)="saveJob()">Save</button>
+            </div>
+          </div>
+          <div class="recommendation-label" *ngIf="recommended">
+            <p><small>{{recommendationLabel}}</small></p>
+          </div>
         </div>
       </div>
     </div>
   </div>
-<!--</a>-->

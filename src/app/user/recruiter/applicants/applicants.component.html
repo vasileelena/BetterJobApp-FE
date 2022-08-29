@@ -14,17 +14,18 @@
             <tr class="candidates-list" *ngFor="let candidate of candidates">
               <td class="title">
                 <div class="thumb">
-                  <img class="img-fluid" src="" alt="">
+                  <img *ngIf="candidate.firstName === 'Elena'" class="img-fluid" [src]="'../../../assets/avatars/female2.jpg'">
+                  <img *ngIf="candidate.firstName === 'Ion'" class="img-fluid" [src]="'../../../assets/avatars/male1.jpg'">
+                  <img *ngIf="candidate.firstName === 'Mihai'" class="img-fluid" [src]="'../../../assets/avatars/male2.jpg'">
                 </div>
                 <div class="candidate-list-details">
                   <div class="candidate-list-info">
                     <div class="candidate-list-title">
-                      <h5 class="mb-0"><a href="#">{{candidate.firstName}} {{candidate.lastName}}</a></h5>
+                      <h5 class="mb-0">{{candidate.firstName}} {{candidate.lastName}}</h5>
                     </div>
                     <div class="candidate-list-option">
                       <ul class="list-unstyled">
-                        <li><i class="fas fa-filter pr-1"></i>Information Technology</li>
-                        <li><i class="fas fa-map-marker-alt pr-1"></i>Rolling Meadows, IL 60008</li>
+                        <li><i class="fas fa-map-marker-alt pr-1"></i>{{candidate.location}}</li>
                       </ul>
                     </div>
                   </div>
@@ -38,7 +39,7 @@
                             title="View profile"
                             data-original-title="View profile"
                             [routerLink]="['/user/profile', candidate.email]"><i
-                      class="far fa-eye"></i>
+                      class="far fa-eye icon-style"></i>
                     </button>
                   </li>
                   <li>
@@ -47,7 +48,7 @@
                             title="Download CV"
                             data-original-title="Download CV"
                             (click)="downloadCvForCandidate(candidate.email)"><i
-                      class="fas fa-file-download"></i>
+                      class="fas fa-file-download icon-style"></i>
                     </button>
                   </li>
                 </ul>

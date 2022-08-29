@@ -10,20 +10,9 @@ export class FileHelperService {
   constructor(private http: HttpClient) { }
 
   downloadFile(route: string): Observable<HttpResponse<Blob>> {
-    let headers: HttpHeaders = new HttpHeaders();
-    // headers = headers.set('Access-Control-Allow-Origin', '*');
-    // headers = headers.set('Access-Control-Request-Method', ['POST', 'GET', 'OPTIONS']);
-    // headers = headers.set('Access-Control-Request-Headers', 'Content-Type');
-
-    return this.http.get(route
-      , {headers: headers,
-      responseType: 'blob',
-      observe: 'response'}
-    );
-
+    return this.http.get(route, {responseType: 'blob', observe: 'response'});
   }
 
-  // use: fileHelper.downloadFile.subscribe((blob: HttpResponse<Blob>) => fileHelper.saveFile(blob.body, filename).subscribe());
   /**
    * Save a file from the blob
    * @param blob the blob received from the backend
@@ -37,6 +26,6 @@ export class FileHelperService {
       anchor.href = url;
       anchor.click();
       subscriber.complete();
-    })
+    });
   }
 }

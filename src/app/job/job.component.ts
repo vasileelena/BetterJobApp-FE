@@ -7,9 +7,11 @@ import * as fa from '@fortawesome/free-solid-svg-icons'
 import {IconDefinition} from "@fortawesome/free-brands-svg-icons";
 import {finalize, Observable, switchMap} from "rxjs";
 import {map} from "rxjs/operators";
-import {NgbModal, NgbModalOptions} from "@ng-bootstrap/ng-bootstrap";
+import {NgbModal, NgbModalOptions, NgbModalRef} from "@ng-bootstrap/ng-bootstrap";
 import {NewJobModalComponent} from "./new-job/new-job-modal.component";
 import {GenericModalComponent} from "../generic-modal/generic-modal.component";
+import {Router} from "@angular/router";
+import {OpenCustomModalService} from "../services/open-custom-modal.service";
 
 
 @Component({
@@ -18,14 +20,6 @@ import {GenericModalComponent} from "../generic-modal/generic-modal.component";
   styleUrls: ['./job.component.css']
 })
 export class JobComponent implements OnInit {
-
-  readonly savedJobModalTitle: string = 'Job was saved to your profile';
-  readonly appliedJobModalTitle: string = 'You have applied to the job position ';
-  readonly savedJobContentModal: string = 'You have successfully saved this job position.\n' +
-    'You can see the job later on \'My jobs\' section.';
-  readonly appliedJobContentModal: string = 'You have successfully applied to this job position.\n' +
-    'If the recruiter decides that you are a fitted candidate, they will contact you. Good luck!\n' +
-    'You can see the all applied jobs later on \'My jobs\' section.';
 
   @Input() model: Job;
   @Input() recruiter: boolean;
@@ -44,11 +38,11 @@ export class JobComponent implements OnInit {
   readonly iconSalary: IconDefinition = fa.faEuroSign;
   readonly iconExperience: IconDefinition = fa.faAward;
 
-  readonly recommendationLabel: string = 'This job could fit your profile'
+  readonly recommendationLabel: string = 'Fits your profile!'
 
   constructor(private userService: UserService,
               private jobService: JobService,
-              private modalService: NgbModal) {
+              private openCustomModalService: OpenCustomModalService) {
   }
 
   ngOnInit(): void {
@@ -59,12 +53,37 @@ export class JobComponent implements OnInit {
     }
   }
 
+  onDeleteJob(): void {
+    // open modal to confirm the deletion
+    const modalInstance: NgbModalRef = this.openCustomModalService.openModal(
+      this.openCustomModalService.closeJobModalTitle + this.model.jobTitle,
+      this.openCustomModalService.closeJobContentModal,
+      true);
+    modalInstance.result.then(() =>
+
+      // handle of confirmation
+      this.jobService.deleteJob(this.model.id, this.model.recruiterId)
+        .subscribe((updatedJobs: Job[]) => {
+
+          // emit that the jobs have been changed for the recruiter
+          this.jobService.jobsChanged.next(updatedJobs);
+
+          // open modal with confirmation message
+          this.openCustomModalService.openModal(this.openCustomModalService.confirmDeletionModalTitle,
+            this.openCustomModalService.confirmDeletionModalContent, false);
+        })
+    );
+  }
+
   applyToJob() {
     this.userService.addJobToUser(this.userId, this.model.id, true)
       .subscribe((appliedJobs: Job[]) => {
         // emit that the jobs list has changed
         this.jobService.appliedJobsChanged.next(appliedJobs);
-        this.openConfirmationModal(this.appliedJobModalTitle + this.model.jobTitle, this.appliedJobContentModal);
+        this.openCustomModalService.openModal(
+          this.openCustomModalService.appliedJobModalTitle + this.model.jobTitle,
+          this.openCustomModalService.appliedJobContentModal,
+          false);
       });
   }
 
@@ -73,7 +92,10 @@ export class JobComponent implements OnInit {
       .subscribe((savedJobs: Job[]) => {
         // emit that the jobs list has changed
         this.jobService.savedJobsChanged.next(savedJobs);
-        this.openConfirmationModal(this.savedJobModalTitle, this.savedJobContentModal);
+        this.openCustomModalService.openModal(
+          this.openCustomModalService.savedJobModalTitle,
+          this.openCustomModalService.savedJobContentModal,
+          false);
       });
   }
 
@@ -116,14 +138,6 @@ export class JobComponent implements OnInit {
 
         this.isInitialised = true;
       });
-  }
-
-  private openConfirmationModal(title: string, content: string) {
-    const modalOptions: NgbModalOptions = {backdrop: 'static', size: 'md'};
-    const modalInstance = this.modalService.open(GenericModalComponent, modalOptions);
-    modalInstance.componentInstance.title = title;
-    modalInstance.componentInstance.content = content;
-    modalInstance.componentInstance.hasConfirmButton = false;
   }
 
 }

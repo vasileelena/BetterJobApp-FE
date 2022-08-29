@@ -31,7 +31,7 @@ export class LogInModalComponent implements OnInit {
   }
 
   onSubmit() {
-    let result = this.authService.login(this.form.value)
+    this.authService.login(this.form.value)
       .subscribe(
         (user: User) => {
         if(user) {
@@ -52,8 +52,8 @@ export class LogInModalComponent implements OnInit {
               .then(() => this.modalService.close());
           }
         }
-      }, error => {
-        alert(error.message());
+      }, (error: any) => {
+        alert('The user doesn\'t exist or the credentials are wrong!');
       })
     this.form.reset();
   }

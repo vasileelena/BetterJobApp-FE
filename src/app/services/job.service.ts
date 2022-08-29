@@ -43,4 +43,8 @@ export class JobService {
       .subscribe((blob: HttpResponse<Blob>) => this.fileHelper.saveFile(blob.body, "CV_" + userEmail + ".pdf")
         .subscribe());
   }
+
+  public deleteJob(jobId: number, recruiterId: number): Observable<Job[]> {
+    return this.http.delete<Job[]>(this.recruiterBaseUrl + '/delete/' + jobId + '/' + recruiterId);
+  }
 }

@@ -74,7 +74,7 @@ export class UserService{
     const formData: FormData = new FormData();
     formData.append('file', file, 'CV_' + userEmail.toString());
 
-    return this.http.post<string>(this.url + "/cv/" + userEmail.toString(), formData);
+    return this.http.post<string>(this.url + "/cv", formData);
   }
 
 }

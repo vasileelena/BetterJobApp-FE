@@ -11,7 +11,7 @@
 
 .job-title-wrapper {
   padding: 50px 70px;
-  background-color: mediumseagreen;
+  background: linear-gradient(to right,var(--firstBlue) 10%,var(--secondBlue));
   height: 150px;
   color: white;
 }
@@ -37,7 +37,7 @@
 }
 
 .info-icon {
-  color: mediumseagreen;
+  color: var(--firstBlue);
   width: 30px;
   text-align: center;
   margin-right: 10px;
@@ -58,7 +58,7 @@
 .job-detail-divider {
   width: 20%;
   height: 2px;
-  color: mediumseagreen;
+  color: var(--firstBlue);
 }
 
 .buttons-wrapper {

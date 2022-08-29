@@ -137,7 +137,9 @@ export class SearchJobsComponent implements OnInit, OnDestroy {
         finalize(() => this.isInitialised = true))
       .subscribe((jobs: Job[]) => {
           this.allJobs = jobs
-            .filter(j => !this.appliedJobs.includes(j))
+            .filter(j => !this.appliedJobs.some(
+              job => JSON.stringify(j) === JSON.stringify(job)
+            ))
             .sort(
               (a: Job, b: Job) => Number(new Date(b.creationDate)) - Number(new Date(a.creationDate)));
           this.displayedJobs = this.allJobs;

@@ -30,7 +30,6 @@ export class SignInModalComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.form.value);
     this.userService.addUser(this.form.value).subscribe(
       () => {
         this.form.reset();

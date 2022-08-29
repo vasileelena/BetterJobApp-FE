@@ -179,3 +179,7 @@ body{
   border: none;
   background-color: white;
 }
+
+.icon-style {
+  color: var(--secondBlue);
+}

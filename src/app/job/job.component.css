@@ -65,11 +65,12 @@ body{
 
 .job-button {
   position: relative;
+  width: auto;
   z-index: 1000;
 }
 
 .job-card-icon {
-  color: #808080;
+  color: var(--firstBlue);
 }
 
 .job-card-tag {
@@ -77,8 +78,22 @@ body{
   margin-left: 2px;
 }
 
+.recommendation-label {
+  color: var(--secondBlue);
+}
+
 .faded-text {
   color: grey;
   opacity: 80%;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+  transition: 0.1s;
+}
+
+a:hover {
+  color: var(--firstBlue);
 }
 
