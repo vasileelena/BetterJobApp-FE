@@ -19,6 +19,7 @@ export class JobDetailsComponent implements OnInit {
   isInitialised: boolean = false;
   job: Job;
   company: string;
+  recruiterAccount: string;
   creationDate: string;
   applied: boolean;
   saved: boolean;
@@ -99,7 +100,10 @@ export class JobDetailsComponent implements OnInit {
           return this.userService.getUserById(this.job.recruiterId);
         }))
       .subscribe(
-        (recruiter: User) => this.company = recruiter.company
+        (recruiter: User) => {
+          this.company = recruiter.company;
+          this.recruiterAccount = recruiter.email;
+        }
       );
 
   }

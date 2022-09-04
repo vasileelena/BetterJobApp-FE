@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from "../services/auth.service";
-import {NgbActiveModal, NgbModal, NgbModalOptions} from "@ng-bootstrap/ng-bootstrap";
+import {NgbModal, NgbModalOptions} from "@ng-bootstrap/ng-bootstrap";
 import {LogInModalComponent} from "../home/login-modal/log-in-modal.component";
-import {ActivatedRoute, Router} from "@angular/router";
+import {Router} from "@angular/router";
 import {SignInModalComponent} from "../home/signin-modal/sign-in-modal.component";
 
 @Component({
@@ -36,7 +36,6 @@ export class HeaderComponent implements OnInit {
   openLoginModal() {
     const modalOptions: NgbModalOptions = {backdrop: 'static', size: 'md'}
     this.modalService.open(LogInModalComponent, modalOptions);
-
   }
 
   openSigninModal() {
@@ -45,11 +44,12 @@ export class HeaderComponent implements OnInit {
 
   }
 
-  navigateToProfile() {
+  navigateToProfile(): string {
     let currentUserEmail: string | null = sessionStorage.getItem('email');
-    if(currentUserEmail !== null) {
-      this.router.navigate(['/user/profile', currentUserEmail]);
+    if (currentUserEmail !== null) {
+      return '/user/profile/' + currentUserEmail;
     }
+    return '/';
   }
 
 }

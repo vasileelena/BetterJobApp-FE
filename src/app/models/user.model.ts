@@ -15,4 +15,5 @@ export interface User {
   description: string;
   location: string;
   skills: string;
+  uploadedCV: boolean;
 }

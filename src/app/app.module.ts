@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {NgbActiveModal, NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgbActiveModal, NgbModule, NgbToastModule} from '@ng-bootstrap/ng-bootstrap';
 import {BrowserModule} from '@angular/platform-browser';
 
 import {AppRoutingModule} from './app-routing.module';
@@ -42,13 +42,14 @@ import { GenericModalComponent } from './generic-modal/generic-modal.component';
     ProfileComponent,
     GenericModalComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-    FontAwesomeModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        ReactiveFormsModule,
+        FontAwesomeModule,
+        NgbToastModule
+    ],
   providers: [NgbActiveModal],
   bootstrap: [AppComponent]
 })

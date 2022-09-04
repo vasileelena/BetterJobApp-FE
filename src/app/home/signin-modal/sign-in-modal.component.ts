@@ -5,7 +5,8 @@ import {HttpErrorResponse} from "@angular/common/http";
 import {UserService} from "../../services/user.service";
 import {RoleEnum, User} from "../../models/user.model";
 import {Router} from "@angular/router";
-import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
+import {NgbActiveModal, NgbModal, NgbModalOptions} from "@ng-bootstrap/ng-bootstrap";
+import {LogInModalComponent} from "../login-modal/log-in-modal.component";
 
 @Component({
   selector: 'app-sign-in-modal',
@@ -21,7 +22,8 @@ export class SignInModalComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
               private userService: UserService,
               private router: Router,
-              private modalService: NgbActiveModal) {
+              private activeModal: NgbActiveModal,
+              private modalService: NgbModal) {
   }
 
   ngOnInit(): void {
@@ -33,7 +35,12 @@ export class SignInModalComponent implements OnInit {
     this.userService.addUser(this.form.value).subscribe(
       () => {
         this.form.reset();
-        this.onCancel();
+        this.router.navigate(['/']).then(
+          () => {
+            this.activeModal.close();
+            this.openLoginModal();
+          }
+        );
       },
       (error: HttpErrorResponse) => {
         alert('This email is already taken!');
@@ -46,8 +53,13 @@ export class SignInModalComponent implements OnInit {
   onCancel() {
     this.form.reset();
     this.router.navigate(['/']).then(
-      () => this.modalService.dismiss()
+      () => this.activeModal.dismiss()
     );
+  }
+
+  openLoginModal() {
+    const modalOptions: NgbModalOptions = {backdrop: 'static', size: 'md'}
+    this.modalService.open(LogInModalComponent, modalOptions);
   }
 
   get formControls() {

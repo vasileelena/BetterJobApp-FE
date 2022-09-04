@@ -7,6 +7,8 @@ import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angul
 import {JobFilterInputs} from "../models/job-filter-inputs.model";
 import {finalize, Subscription, switchMap} from "rxjs";
 import {JobService} from "../services/job.service";
+import {OpenCustomModalService} from "../services/open-custom-modal.service";
+import {NgbModalRef} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: 'app-user',
@@ -14,9 +16,17 @@ import {JobService} from "../services/job.service";
   styleUrls: ['./search-jobs.component.css']
 })
 export class SearchJobsComponent implements OnInit, OnDestroy {
+
+  readonly addInfoModalTitle: string = 'Your profile lacks information!';
+  readonly addSkillsModalContent: string = 'Complete your profile by adding skills, so job openings can be recommended to you!';
+  readonly addCVModalContent: string = 'Complete your profile by adding a CV, so you can apply to job openings!';
+  readonly addSkillsAndCvModalContent: string = 'Complete your profile by adding skills and a CV, so you can have the best chances to find your new job!';
+
   isInitialised: boolean = false;
   choseSearchMethod: boolean;
   currentUserId: any;
+  userHasSkills: boolean;
+  userUploadedCv: boolean;
 
   allJobs: Job[] = [];
   displayedJobs: Job [] = [];
@@ -39,7 +49,8 @@ export class SearchJobsComponent implements OnInit, OnDestroy {
   constructor(private userService: UserService,
               private jobService: JobService,
               private router: Router,
-              private formBuilder: FormBuilder) {
+              private formBuilder: FormBuilder,
+              private openCustomModalService: OpenCustomModalService) {
   }
 
   ngOnInit(): void {
@@ -123,6 +134,8 @@ export class SearchJobsComponent implements OnInit, OnDestroy {
       .pipe(
         switchMap((user: User) => {
           this.currentUserId = user.id;
+          this.userHasSkills = (user.skills.length > 0);
+          this.userUploadedCv = user.uploadedCV;
           return this.userService.getSavedJobs(this.currentUserId);
         }),
         switchMap((jobs: Job[]) => {
@@ -134,7 +147,12 @@ export class SearchJobsComponent implements OnInit, OnDestroy {
           return this.userService.getAllJobs();
         }))
       .pipe(
-        finalize(() => this.isInitialised = true))
+        finalize(() => {
+          this.isInitialised = true;
+          if(!this.userHasSkills || !this.userUploadedCv){
+            this.generateAddInfoToProfileModal();
+          }
+        }))
       .subscribe((jobs: Job[]) => {
           this.allJobs = jobs
             .filter(j => !this.appliedJobs.some(
@@ -145,6 +163,26 @@ export class SearchJobsComponent implements OnInit, OnDestroy {
           this.displayedJobs = this.allJobs;
         }
       );
+  }
+
+  private generateAddInfoToProfileModal() {
+    let modalContent: string;
+    if (!this.userHasSkills && !this.userUploadedCv) {
+      modalContent = this.addSkillsAndCvModalContent;
+    }
+    else if (!this.userHasSkills) {
+      modalContent = this.addSkillsModalContent;
+    }
+    else {
+      modalContent = this.addCVModalContent;
+    }
+
+    const modalInstance: NgbModalRef = this.openCustomModalService.openModal(
+      this.addInfoModalTitle,
+      modalContent,
+      true);
+
+    modalInstance.result.then(() => this.router.navigate(['user/profile/edit']));
   }
 
   private initForm() {

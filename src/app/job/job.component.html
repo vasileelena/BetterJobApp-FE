@@ -30,10 +30,19 @@
         <div *ngIf="!recruiter" class="col-sm-2 text-lg-end ml-auto d-flex flex-column gap-2">
           <div  class="d-flex flex-row gap-1">
             <div *ngIf="!applied">
-              <button class="btn gradient-button job-button stretched-link" (click)="applyToJob()">Apply</button>
+              <button
+                class="btn gradient-button job-button stretched-link"
+                (click)="applyToJob()"
+                [disabled]="!userHasCv"
+                #applyButton> Apply
+              </button>
+              <small *ngIf="applyButton.disabled">CV is required</small>
             </div>
             <div *ngIf="!saved">
-              <button class="btn gradient-button job-button stretched-link" (click)="saveJob()">Save</button>
+              <button
+                class="btn gradient-button job-button stretched-link"
+                (click)="saveJob()"> Save
+              </button>
             </div>
           </div>
           <div class="recommendation-label" *ngIf="recommended">

@@ -75,10 +75,13 @@ export class EditUserComponent implements OnInit {
   }
 
   onCvAdded(): void {
-    this.userService.uploadCv(this.selectedFile, this.model.email).subscribe(
-      (message: string) => this.fileInput.nativeElement.value = '',
-      () => this.fileInput.nativeElement.value = ''
-    );
+    this.userService.uploadCv(this.selectedFile, this.model.email).pipe(
+      finalize(() => this.fileInput.nativeElement.value = ''),
+      switchMap(() => {
+        this.model.uploadedCV = true;
+        return this.userService.updateUser(this.model);
+        //todo ceva animatie in loc de console log-ul ala
+      })).subscribe(() => console.log('bun'), (error) => alert(error.message));
   }
 
   private initForm(): void {
