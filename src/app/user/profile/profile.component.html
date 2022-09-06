@@ -6,7 +6,8 @@
         <div class="widget head-profile has-shadow">
           <div class="widget-body pb-0">
             <div class="row d-flex align-items-center">
-              <div class="col-xl-4 col-md-4 d-flex justify-content-lg-start justify-content-md-start justify-content-center">
+              <div
+                class="col-xl-4 col-md-4 d-flex justify-content-lg-start justify-content-md-start justify-content-center">
                 <ul>
                   <li>
                     <div class="heading">{{model.role.toString().toLowerCase()}}</div>
@@ -15,16 +16,20 @@
               </div>
               <div class="col-xl-4 col-md-4 d-flex justify-content-center">
                 <div class="image-default">
-                  <img class="rounded-circle" src="https://bootdey.com/img/Content/avatar/avatar5.png" alt="...">
+                  <img class="rounded-circle" [src]="'../../../assets/profile-pictures/IMG_' + model.email + '.jpeg'"
+                       alt="profile picture">
                 </div>
                 <div class="infos">
                   <h2>{{model.firstName}} {{ model.lastName }}</h2>
-                  <div class="location">{{model.location}}</div>
+                  <div class="location" *ngIf="model.role.toString() === 'USER'">{{model.location}}</div>
+                  <div class="location" *ngIf="model.role.toString() !== 'USER'">{{model.company}}</div>
                 </div>
               </div>
-              <div class="col-xl-4 col-md-4 d-flex justify-content-lg-end justify-content-md-end justify-content-center">
+              <div
+                class="col-xl-4 col-md-4 d-flex justify-content-lg-end justify-content-md-end justify-content-center">
                 <div class="follow" *ngIf="model.role.toString() === 'USER'">
-                  <button class="btn btn-shadow" (click)="downloadCv()"><i class="la la-user-plus"></i>Download resume</button>
+                  <button class="btn btn-shadow" (click)="downloadCv()"><i class="la la-user-plus"></i>Download resume
+                  </button>
                 </div>
               </div>
             </div>
@@ -32,22 +37,22 @@
         </div>
       </div>
     </div>
-    <div *ngIf="model.role.toString() !== 'USER'">
-      <h5>Company</h5>
-      <p>{{model.company}}</p>
-    </div>
-    <div *ngIf="model.role.toString() === 'USER'">
-      <h5>Description</h5>
-      <p>{{model.description}}</p>
-    </div>
-    <div *ngIf="model.role.toString() === 'USER'">
-      <h5>Skills</h5>
-      <div class="d-flex gap-3">
-          <p *ngFor="let skill of model.skills.split(',')">{{skill}}</p>
+    <div class="container">
+      <div *ngIf="model.role.toString() === 'USER'" class="row">
+        <div class="col-lg-5 col-sm-12 infos-wrapper has-shadow">
+          <h4 class="mb-3"><i class="far fa-comment-dots profile-icon"></i> Description</h4>
+          <p>{{model.description}}</p>
+        </div>
+        <div class="col-lg-5 col-sm-12 infos-wrapper has-shadow offset-lg-2">
+          <h4 class="mb-3"><i class="far fa-lightbulb profile-icon"></i> Skills</h4>
+          <div class="d-flex gap-3">
+            <p *ngFor="let skill of model.skills.split(',')" class="skill">{{skill}}</p>
+          </div>
+        </div>
       </div>
     </div>
     <div *ngIf="model.role.toString() !== 'USER'">
-      <h5>Posted jobs</h5>
+      <h4>Posted jobs</h4>
       <div class="container" *ngFor="let job of jobList">
         <app-job [model]="job" [recruiter]="isCurrentUserRecruiter()"></app-job>
       </div>

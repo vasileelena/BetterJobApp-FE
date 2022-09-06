@@ -4,7 +4,7 @@ body{
 }
 .db-social .jumbotron {
   margin: 0;
-  background: url(https://bootdey.com/img/Content/flores-amarillas-wallpaper.jpeg);
+  background: url(https://wallpapercave.com/wp/wp5134496.jpg);
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
@@ -125,23 +125,6 @@ body{
   padding: 0;
   font-size: 1.7rem;
 }
-.actions .dropdown-menu {
-  border: none;
-  min-width: auto;
-  font-size: 1rem;
-  border-radius: 4px;
-  padding: 1.4rem 1.8rem;
-  text-align: left;
-  box-shadow: 1px 1px 30px rgba(0,0,0,.15);
-}
-
-.actions .dropdown-menu .dropdown-item {
-  padding: .5rem 0;
-}
-.actions .dropdown-menu a {
-  color: #2c304d;
-  font-weight: 500;
-}
 
 .db-social .head-profile li:first-child {
   padding-left: 0;
@@ -159,4 +142,27 @@ body{
 .db-social .head-profile li .heading {
   color: #aea9c3;
   font-size: 1rem;
+}
+
+.infos-wrapper {
+  border: 1px solid #ececec;
+  border-radius: 5px;
+  padding: 30px;
+  margin-bottom: 10px;
+  height: 200px;
+}
+
+.profile-icon {
+  color: var(--firstBlue);
+  width: 30px;
+  text-align: center;
+  margin-right: 5px;
+}
+
+.skill {
+  background-color: #ececec;
+  border-radius: 8px;
+  opacity: 0.7;
+  color: var(--firstBlue);
+  padding: 3px 7px;
 }

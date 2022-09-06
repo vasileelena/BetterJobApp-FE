@@ -14,9 +14,7 @@
             <tr class="candidates-list" *ngFor="let candidate of candidates">
               <td class="title">
                 <div class="thumb">
-                  <img *ngIf="candidate.firstName === 'Elena'" class="img-fluid" [src]="'../../../assets/avatars/female2.jpg'">
-                  <img *ngIf="candidate.firstName === 'Ion'" class="img-fluid" [src]="'../../../assets/avatars/male1.jpg'">
-                  <img *ngIf="candidate.firstName === 'Mihai'" class="img-fluid" [src]="'../../../assets/avatars/male2.jpg'">
+                  <img class="img-fluid" [src]="'../../../assets/profile-pictures/IMG_' + candidate.email + '.jpeg'">
                 </div>
                 <div class="candidate-list-details">
                   <div class="candidate-list-info">

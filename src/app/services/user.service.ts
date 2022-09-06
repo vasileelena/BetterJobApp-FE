@@ -1,11 +1,12 @@
 import {Injectable} from "@angular/core";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpResponse} from "@angular/common/http";
 import {Observable} from "rxjs";
 import { map } from 'rxjs/operators';
 import {User} from "../models/user.model";
 import {environment} from "../../environments/environment";
 import {Job} from "../models/job.model";
 import {UserJob} from "../models/user-job-model";
+import {FileHelperService} from "./file-helper.service";
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,8 @@ import {UserJob} from "../models/user-job-model";
 export class UserService{
   private url = environment.apiBaseUrl + '/user';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,
+              private fileHelper: FileHelperService) {}
 
   public getUsers(): Observable<User[]> {
     return this.http.get<User[]>(this.url + '/all');
@@ -75,6 +77,13 @@ export class UserService{
     formData.append('file', file, 'CV_' + userEmail.toString());
 
     return this.http.post<string>(this.url + "/cv", formData);
+  }
+
+  public uploadProfilePicture(file: File, userEmail: string): Observable<string> {
+    const formData: FormData = new FormData();
+    formData.append('file', file, 'IMG_' + userEmail.toString());
+
+    return this.http.post<string>(this.url + "/profile-picture", formData);
   }
 
 }

@@ -25,7 +25,7 @@
 
         <div *ngIf="recruiter" class="col-sm-2 text-lg-end ml-auto d-flex flex-column gap-1 ">
           <button class="btn gradient-button job-button" (click)="onDeleteJob()">Close job opening</button>
-          <a [routerLink]="['applicants', model.id]"> {{numberOfCandidates}} candidates</a>
+          <a [routerLink]="['/recruiter/job/applicants/', model.id]"> {{numberOfCandidates}} candidates</a>
         </div>
         <div *ngIf="!recruiter" class="col-sm-2 text-lg-end ml-auto d-flex flex-column gap-2">
           <div  class="d-flex flex-row gap-1">

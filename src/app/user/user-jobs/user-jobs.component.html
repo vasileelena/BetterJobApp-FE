@@ -1,5 +1,7 @@
-<h3>Saved jobs</h3>
-<section *ngIf="isInitialised">
+<section class="wraper" *ngIf="isInitialised">
+  <div class="container">
+    <h3 class="m-3 section-title"><i class="fas fa-save icon"></i> Saved jobs</h3>
+  </div>
   <div class="container" *ngFor="let job of savedJobs">
     <app-job
       [model]="job"
@@ -10,7 +12,13 @@
     ></app-job>
   </div>
 
-  <h3>Applied jobs</h3>
+  <div class="container">
+    <hr class="divider">
+  </div>
+
+  <div class="container">
+    <h3 class="m-3 section-title"><i class="far fa-check-circle icon"></i> Applied jobs</h3>
+  </div>
   <div class="container" *ngFor="let job of appliedJobs">
     <app-job
       [model]="job"

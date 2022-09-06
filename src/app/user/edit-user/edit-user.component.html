@@ -1,118 +1,134 @@
-<div *ngIf="isInitialised" class="  ">
-
-  <form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <div class="form-group">
-      <label for="firstName">First name</label><br>
-      <input
-        id="firstName"
-        formControlName="firstName"
-        [(ngModel)]="model.firstName"
-        type="text"
-        class="form-control">
-      <span
-        *ngIf="!formControls['firstName'].valid && formControls['firstName'].touched"
-        class="text-danger">
+<div *ngIf="isInitialised">
+  <div class="row">
+    <div class="col-lg-4 col-sm-12 offset-lg-1 wrapper">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" (change)="onEdit()">
+        <div class="form-group">
+          <label for="firstName">First name</label><br>
+          <input
+            id="firstName"
+            formControlName="firstName"
+            [(ngModel)]="model.firstName"
+            type="text"
+            class="form-control">
+          <span
+            *ngIf="!formControls['firstName'].valid && formControls['firstName'].touched"
+            class="text-danger">
           This field is required
           </span>
-    </div>
-    <div class="form-group">
-      <label for="lastName">Last name</label><br>
-      <input
-        id="lastName"
-        type="text"
-        formControlName="lastName"
-        [(ngModel)]="model.lastName"
-        class="form-control">
-      <span
-        *ngIf="!formControls['lastName'].valid && formControls['lastName'].touched"
-        class="text-danger">
+        </div>
+        <div class="form-group">
+          <label for="lastName">Last name</label><br>
+          <input
+            id="lastName"
+            type="text"
+            formControlName="lastName"
+            [(ngModel)]="model.lastName"
+            class="form-control">
+          <span
+            *ngIf="!formControls['lastName'].valid && formControls['lastName'].touched"
+            class="text-danger">
           This field is required
           </span>
-    </div>
-    <div class="form-group" *ngIf="this.model.role.toString() === 'USER'">
-      <label for="description">Description</label><br>
-      <textarea
-        id="description"
-        rows="5"
-        formControlName="description"
-        maxlength="250"
-        [(ngModel)]="model.description"
-        class="form-control"></textarea>
-    </div>
-    <div class="form-group" *ngIf="this.model.role.toString() !== 'USER'">
-      <label for="company">Company</label><br>
-      <input
-        id="company"
-        type="text"
-        formControlName="company"
-        [(ngModel)]="model.company"
-        class="form-control">
-      <span
-        *ngIf="!formControls['company'].valid && formControls['company'].touched"
-        class="text-danger">
+        </div>
+        <div class="form-group" *ngIf="this.model.role.toString() === 'USER'">
+          <label for="description">Description</label><br>
+          <textarea
+            id="description"
+            rows="5"
+            formControlName="description"
+            maxlength="250"
+            [(ngModel)]="model.description"
+            class="form-control"></textarea>
+        </div>
+        <div class="form-group" *ngIf="this.model.role.toString() !== 'USER'">
+          <label for="company">Company</label><br>
+          <input
+            id="company"
+            type="text"
+            formControlName="company"
+            [(ngModel)]="model.company"
+            class="form-control">
+          <span
+            *ngIf="!formControls['company'].valid && formControls['company'].touched"
+            class="text-danger">
           This field is required
           </span>
-    </div>
-    <div *ngIf="this.model.role.toString() === 'USER'" class="form-group">
-      <label for="location">Location</label><br>
-      <input id="location"
-             name="location"
-             type="text"
-             formControlName="location"
-             [(ngModel)]="model.location"
-             class="form-control">
-      <span
-        *ngIf="!formControls['location'].valid && formControls['location'].touched"
-        class="text-danger">
+        </div>
+        <div *ngIf="this.model.role.toString() === 'USER'" class="form-group">
+          <label for="location">Location</label><br>
+          <input id="location"
+                 name="location"
+                 type="text"
+                 formControlName="location"
+                 [(ngModel)]="model.location"
+                 class="form-control">
+          <span
+            *ngIf="!formControls['location'].valid && formControls['location'].touched"
+            class="text-danger">
           This field is required
           </span>
-    </div>
-    <div *ngIf="this.model.role.toString() === 'USER'">
-      <label for="skills">Skills</label><br>
-      <div class="form-group" formArrayName="skills" id="skills">
-        <div class="row" *ngFor="let skill of skills.controls; let i = index">
-          <div class="col-xs-12">
-            <input
-              type="text"
-              class="form-control"
-              [formControlName]="i">
-            <button
-              type="button"
-              class="btn btn-danger"
-              (click)="onDeleteSkill(i)"> X
-            </button>
+        </div>
+        <div *ngIf="this.model.role.toString() === 'USER'">
+          <label for="skills">Skills</label><br>
+          <div class="form-group" formArrayName="skills" id="skills">
+            <div class="d-flex gap-2" *ngFor="let skill of skills.controls; let i = index">
+              <div class="d-flex gap-2 mb-1">
+                <input
+                  type="text"
+                  class="form-control"
+                  [formControlName]="i">
+                <button
+                  type="button"
+                  class="btn btn-danger"
+                  (click)="onDeleteSkill(i)"><i class="fas fa-trash-alt"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12">
+              <button
+                class="btn btn-sm btn-success mb-3"
+                type="button"
+                (click)="onAddSkill()"><i class="fas fa-plus me-1"></i> Add skill
+              </button>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-xs-12">
-          <button
-            class="btn btn-success"
-            type="button"
-            (click)="onAddSkill()">Add skill
-          </button>
+        <button
+          class="btn gradient-button"
+          type="submit"
+          [disabled]="!form.valid">
+          Save changes
+        </button>
+        <span *ngIf="changesSaved"><i class="far fa-check-circle ms-3 link-success"></i> changes saved</span>
+        <span *ngIf="changesPending"><i class="fas fa-exclamation-triangle ms-3 link-warning"></i> changes not saved</span>
+      </form>
+    </div>
+
+    <div class="offset-lg-1 col-lg-4 col-sm-12 wrapper d-flex flex-column gap-5 justify-content-center">
+      <div>
+        <div class="d-flex justify-content-center">
+          <img class="rounded-circle profile-picture" [src]="profilePicSrc" alt="profile-picture">
+        </div>
+        <h5 class="mb-4">Profile picture</h5>
+        <div>
+          <input class="form-control" #fileInputProfilePic name="file" type="file"
+                 (change)="onFileSelectedForProfilePic($event)"/>
+          <small> *only JPG, JPEG and PNG format accepted</small><br>
+          <button class="btn gradient-button mt-2" (click)="onProfilePictureAdded()">Upload picture</button>
         </div>
       </div>
-    </div>
-    <div>
-      <button type="button" class="btn btn-secondary"
-      >Close
-      </button>
-      <button
-        class="btn gradient-button"
-        type="submit"
-        [disabled]="!form.valid">
-        Save changes
-      </button>
-    </div>
-  </form>
-
-  <div *ngIf="this.model.role.toString() === 'USER'">
-    <h3>Upload CV</h3>
-    <div>
-      <input class="form-control" #fileInput name="file" type="file" (change)="onFileSelected($event)" accept="application/pdf"/>
-      <small> *only PDF format accepted</small><br>
-      <button class="btn gradient-button" (click)="onCvAdded()">Upload</button>
+      <div *ngIf="this.model.role.toString() === 'USER'">
+        <h5 class="mb-4">Upload or update your CV</h5>
+        <div>
+          <input class="form-control" #fileInputCv name="file" type="file" (change)="onFileSelectedForCv($event)"
+                 accept="application/pdf"/>
+          <small> *only PDF format accepted</small><br>
+          <button class="btn gradient-button mt-2" (click)="onCvAdded()">Upload CV</button>
+          <span *ngIf="cvWasUploaded"><i class="far fa-check-circle ms-3 link-success"></i> uploaded</span>
+        </div>
+      </div>
     </div>
   </div>
 </div>
