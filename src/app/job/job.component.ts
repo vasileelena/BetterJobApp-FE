@@ -27,6 +27,7 @@ export class JobComponent implements OnInit {
   @Input() saved: boolean;
   @Input() applied: boolean;
   @Input() userHasCv: boolean;
+  @Input() hideButtons: boolean;
 
   isInitialised: boolean = false;
   numberOfCandidates: number;

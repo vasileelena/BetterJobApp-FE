@@ -52,9 +52,13 @@
       </div>
     </div>
     <div *ngIf="model.role.toString() !== 'USER'">
-      <h4>Posted jobs</h4>
+      <h3 class="mt-5 mb-5">Posted jobs</h3>
       <div class="container" *ngFor="let job of jobList">
-        <app-job [model]="job" [recruiter]="isCurrentUserRecruiter()"></app-job>
+        <app-job [model]="job"
+                 [recruiter]="isCurrentUserRecruiter()"
+                 [userId]="currentUserId"
+                 [userHasCv]="currentUserHasCv"
+                 [hideButtons]="true"></app-job>
       </div>
     </div>
   </div>

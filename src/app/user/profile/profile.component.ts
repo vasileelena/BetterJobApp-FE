@@ -16,6 +16,8 @@ export class ProfileComponent implements OnInit {
 
   model: User;
   jobList: Job[] = [];
+  currentUserId: number;
+  currentUserHasCv: boolean;
   isInitialised: boolean = false;
 
   constructor(private route: ActivatedRoute,
@@ -39,11 +41,6 @@ export class ProfileComponent implements OnInit {
   private initUser(): void {
     const userEmail: string = this.route.snapshot.params['userEmail'];
     this.userService.getUserByEmail(userEmail)
-      // .subscribe(
-      // (user: User) => {
-      //   this.model = user;
-      //   this.isInitialised = true;
-      // });
       .pipe(
         finalize(() => this.isInitialised = true),
         switchMap(
@@ -55,11 +52,17 @@ export class ProfileComponent implements OnInit {
           else {
             return of();
           }
-        }))
-      .subscribe(
-        (jobs: Job[]) => {
+        }),
+        switchMap((jobs: Job[]) => {
           this.jobList = jobs;
-        });
+          let email: string = sessionStorage.getItem('email')!;
+          return this.userService.getUserByEmail(email);
+        }))
+      .subscribe((user: User) => {
+          this.currentUserHasCv = user.uploadedCV;
+          this.currentUserId = user.id;
+        }
+        );
   }
 
 }
