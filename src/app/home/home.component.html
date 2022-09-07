@@ -1,0 +1,70 @@
+<section *ngIf="isInitialised">
+  <div class="header">
+    <h1 class="title">Find a better job today!</h1>
+    <p> Create an account and start searching.</p>
+    <button class="btn btn-lg btn-dark mt-3" (click)="openSigninModal()">Get started</button>
+  </div>
+  <div class="jobs-container row">
+    <h3 class="text-center mb-5">Recent job openings</h3>
+    <div class="col-lg-3 col-md-6 col-sm-12 mb-md-4 mb-sm-4" *ngFor="let job of recentJobs">
+      <div class="card p-2">
+        <div class="text-right"><small>{{job.program.toString().split('_').join(' ')}}</small></div>
+        <div class="text-center mt-2 p-3"><span class="d-block font-weight-bold">{{job.jobTitle}}</span>
+          <hr>
+          <span><i class="fas fa-user-tie icon"></i> {{job.company}}</span>
+          <div class="d-flex flex-row align-items-center justify-content-center">
+            <small class="ml-1 mt-2">{{job.industry.toString().split('_').join(' ')}}</small>
+          </div>
+          <div class="d-flex justify-content-between mt-3"><span>{{job.salaryLowerRange}}
+            - {{job.salaryUpperRange}} {{job.currency}}</span>
+            <button class="btn btn-sm btn-outline-dark" (click)="openLoginModal()">Apply Now</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="industries-container d-flex flex-column text-center">
+    <h2>Get job openings recommendation from 21 industries!</h2>
+    <div class="row">
+      <div class="col-lg-4 col-md-12 industry-wrapper">
+        <i class="fas fa-laptop fa-2x"></i>
+        <h4 class="mt-2">Information technology</h4>
+      </div>
+      <div class="col-lg-4 col-md-12 industry-wrapper">
+        <i class="fas fa-paint-brush fa-2x"></i>
+        <h4 class="mt-2"> Art and design</h4>
+      </div>
+      <div class="col-lg-4 col-md-12 industry-wrapper">
+        <i class="fas fa-gavel fa-2x"></i>
+        <h4 class="mt-2">Law</h4>
+      </div>
+    </div>
+    <h6> ... and more!</h6>
+  </div>
+
+  <div id="steps-carousel" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <h3 class="carousel-text"><img [src]="'../../assets/create-account-image.jpg'" alt="create account image">
+          Create an account and add your personal information.</h3>
+
+      </div>
+      <div class="carousel-item">
+        <h4 class="carousel-text"><img [src]="'../../assets/add-skills-image.jpg'" alt="add skills image">
+          Add skills to your profile, so job openings can be recommended to you.</h4>
+      </div>
+      <div class="carousel-item">
+        <h4 class="carousel-text"><img [src]="'../../assets/apply-image-1.jpg'" alt="apply image">
+          Upload a CV, and start applying!</h4>
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" href="#steps-carousel" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" href="#steps-carousel" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+</section>
