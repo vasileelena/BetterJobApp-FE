@@ -14,6 +14,7 @@ export class UserJobsComponent implements OnInit {
   savedJobs: Job[] = [];
   appliedJobs: Job[] = [];
   currentUserId: any;
+  uploadedCv: boolean;
   isInitialised: boolean = false;
 
   constructor(private userService: UserService) { }
@@ -41,6 +42,7 @@ export class UserJobsComponent implements OnInit {
       .pipe(
         switchMap((user: User) => {
           this.currentUserId = user.id;
+          this.uploadedCv = user.uploadedCV;
           return this.userService.getSavedJobs(this.currentUserId);
         }),
         switchMap((jobs: Job[]) => {

@@ -8,6 +8,6 @@ export interface JobFilterInputs {
   program: ProgramEnum[];
   salaryLowerRange: number;
   salaryUpperRange: number;
-  currency: CurrencyEnum;
+  currency: number;
   location: LocationEnum[];
 }
